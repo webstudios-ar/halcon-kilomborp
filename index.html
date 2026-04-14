@@ -418,7 +418,9 @@ footer span{color:var(--dorado);}
       <div class="fg-titulo">Datos del postulante</div>
       <div class="fi"><label class="fl"><span>1</span>Nombre IC en el server</label><input class="finput" id="q_nombre" type="text" placeholder="Tu nombre de personaje..."></div>
 
-      <div class="fi"><label class="fl"><span>2</span>Rango actual en la PFA</label>
+      <div class="fi"><label class="fl"><span>2</span>Tu ID de Discord</label><input class="finput" id="q_discord_id" type="text" placeholder="Ej: 123456789012345678..." style="font-family:'Share Tech Mono',monospace;"><p style="font-size:.8rem;color:var(--gris);margin-top:.4rem;font-weight:300;">Para obtener tu ID: Ajustes → Avanzado → Activar Modo Desarrollador → Click derecho en tu nombre → Copiar ID</p></div>
+
+      <div class="fi"><label class="fl"><span>3</span>Rango actual en la PFA</label>
         <select class="fselect" id="q_rango">
           <option value="">Seleccioná tu rango...</option>
           <option>Sargento</option>
@@ -440,8 +442,8 @@ footer span{color:var(--dorado);}
           <option>Comisario General</option>
         </select>
       </div>
-      <div class="fi"><label class="fl"><span>3</span>¿Tenés micrófono?</label><div class="radio-g"><label class="radio-l"><input type="radio" name="mic" value="Sí"><span>Sí</span></label><label class="radio-l"><input type="radio" name="mic" value="No"><span>No</span></label></div></div>
-      <div class="fi"><label class="fl"><span>4</span>Días disponibles por semana</label><div class="radio-g"><label class="radio-l"><input type="radio" name="dias" value="1-2 días"><span>1–2 días</span></label><label class="radio-l"><input type="radio" name="dias" value="3-4 días"><span>3–4 días</span></label><label class="radio-l"><input type="radio" name="dias" value="5+ días"><span>5+ días</span></label></div></div>
+      <div class="fi"><label class="fl"><span>4</span>¿Tenés micrófono?</label><div class="radio-g"><label class="radio-l"><input type="radio" name="mic" value="Sí"><span>Sí</span></label><label class="radio-l"><input type="radio" name="mic" value="No"><span>No</span></label></div></div>
+      <div class="fi"><label class="fl"><span>5</span>Días disponibles por semana</label><div class="radio-g"><label class="radio-l"><input type="radio" name="dias" value="1-2 días"><span>1–2 días</span></label><label class="radio-l"><input type="radio" name="dias" value="3-4 días"><span>3–4 días</span></label><label class="radio-l"><input type="radio" name="dias" value="5+ días"><span>5+ días</span></label></div></div>
     </div>
     <div class="fg">
       <div class="fg-titulo">Conocimiento y protocolo</div>
@@ -665,12 +667,13 @@ function getLatasResultado(){
 async function enviarExamen(){
   const btn=document.getElementById('btnEnviar');
   const st=document.getElementById('statusExamen');
-  const nombre=document.getElementById('q_nombre').value.trim();
+  const nombre=document.getElementById("q_nombre").value.trim();
+  const discordId=document.getElementById("q_discord_id").value.trim();
   const rango=document.getElementById('q_rango').value;
   const mic=document.querySelector('input[name="mic"]:checked');
   const dias=document.querySelector('input[name="dias"]:checked');
-  if(!nombre||!rango||!mic||!dias){
-    st.textContent='⚠ Completá todos los campos obligatorios antes de enviar.';
+  if(!nombre||!discordId||!rango||!mic||!dias){
+    st.textContent='⚠ Completá todos los campos obligatorios antes de enviar (incluido tu ID de Discord).';
     st.className='fstatus err';st.style.display='block';return;
   }
   btn.disabled=true;btn.textContent='ENVIANDO...';
@@ -680,6 +683,7 @@ async function enviarExamen(){
   body+=`🏅 **Rango PFA:** ${rango}\n`;
   body+=`🎙️ **Micrófono:** ${mic.value}\n`;
   body+=`📅 **Disponibilidad:** ${dias.value}\n`;
+  body+=`🔗 **Discord ID:** ${discordId}\n`;
   body+=`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
   body+=`**📋 PREGUNTA 1 — Cantidades de latas por robo**\n\`\`\`${getLatasResultado()}\`\`\`\n`;
   const preguntas=[
@@ -702,7 +706,7 @@ async function enviarExamen(){
   body.split('\n').forEach(line=>{if((cur+line+'\n').length>1900){chunks.push(cur);cur='';}cur+=line+'\n';});
   if(cur)chunks.push(cur);
   try{
-    for(const chunk of chunks){await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:chunk,username:'🦅 Halcón — Exámenes'})});}
+    for(const chunk of chunks){await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:chunk,username:'Brigada Halcón — KilomboRP',avatar_url:'https://cdn.discordapp.com/app-icons/1493455830542975066/eb8be09394bc40cd5edb9c3476e67659.png?size=256'})});}
     st.textContent='✅ Examen enviado al Discord del Grupo Halcón. Un evaluador se contactará a la brevedad.';
     st.className='fstatus ok';st.style.display='block';
     btn.textContent='✅ ENVIADO';
@@ -1157,7 +1161,7 @@ async function enviarMapa(){
   vehiculos.forEach((v,i)=>{msg+=`**${v.tipo.toUpperCase()} ${i+1}** → pos ${Math.round(v.x*100)}% / ${Math.round(v.y*100)}% · rot ${v.rot}°\n`;});
   if(nota)msg+=`\n📝 **Nota:** ${nota}`;
   try{
-    await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:msg,username:'🦅 Halcón — Posicionamiento'})});
+    await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:msg,username:'Brigada Halcón — KilomboRP',avatar_url:'https://cdn.discordapp.com/app-icons/1493455830542975066/eb8be09394bc40cd5edb9c3476e67659.png?size=256'})});
     st.textContent='✅ Posicionamiento enviado al Discord.';st.className='fstatus ok';st.style.display='block';
   }catch(e){st.textContent='❌ Error al enviar.';st.className='fstatus err';st.style.display='block';}
 }
