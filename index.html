@@ -7,1135 +7,1160 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
 :root {
-  --negro:    #07090c;
-  --carbon:   #0d1219;
-  --placa:    #131c26;
-  --panel:    #0f1720;
-  --dorado:   #c8a84b;
-  --oro:      #e8c558;
-  --oro-dark: #7a6020;
-  --rojo:     #cc2828;
-  --rojo-dark:#6b1212;
-  --blanco:   #edeae2;
-  --gris:     #7a8590;
-  --gris-clr: #a8b4be;
+  --negro:#07090c; --carbon:#0d1219; --placa:#131c26; --panel:#0f1720;
+  --dorado:#c8a84b; --oro:#e8c558; --oro-dark:#7a6020;
+  --rojo:#cc2828; --blanco:#edeae2; --gris:#7a8590; --gris-clr:#a8b4be;
 }
+html { scroll-behavior:smooth; }
+body { background:var(--negro); color:var(--blanco); font-family:'Barlow Condensed',sans-serif; overflow-x:hidden; font-size:17px; line-height:1.5; }
+::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-track { background:var(--negro); } ::-webkit-scrollbar-thumb { background:var(--dorado); }
 
-html { scroll-behavior: smooth; }
+/* HERO */
+.hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:2rem 1.5rem; text-align:center; }
+.hero-bg { position:absolute; inset:0; z-index:0; background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(200,168,75,.07) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(139,26,26,.12) 0%,transparent 60%),linear-gradient(180deg,#07090c 0%,#0a0f16 100%); }
+.hero-grid { position:absolute; inset:0; z-index:0; background-image:linear-gradient(rgba(200,168,75,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.03) 1px,transparent 1px); background-size:50px 50px; }
+.hero-vignette { position:absolute; inset:0; z-index:0; background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.8) 100%); }
+.corner { position:absolute; width:36px; height:36px; z-index:2; opacity:.35; }
+.c-tl{top:18px;left:18px;border-top:1.5px solid var(--dorado);border-left:1.5px solid var(--dorado);}
+.c-tr{top:18px;right:18px;border-top:1.5px solid var(--dorado);border-right:1.5px solid var(--dorado);}
+.c-bl{bottom:18px;left:18px;border-bottom:1.5px solid var(--dorado);border-left:1.5px solid var(--dorado);}
+.c-br{bottom:18px;right:18px;border-bottom:1.5px solid var(--dorado);border-right:1.5px solid var(--dorado);}
+.hero-content { position:relative; z-index:3; width:100%; max-width:700px; }
+.hero-badge { display:inline-block; font-family:'Share Tech Mono',monospace; font-size:clamp(.55rem,1.8vw,.7rem); letter-spacing:clamp(.2em,1vw,.5em); color:var(--rojo); border:1px solid rgba(204,40,40,.35); padding:3px 14px; margin-bottom:2rem; animation:blink 3s infinite; }
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-top-line { display:flex; align-items:center; justify-content:center; gap:.8rem; margin-bottom:1rem; opacity:0; animation:fadeUp .8s ease .1s forwards; }
+.htl-bar { height:1px; width:60px; } .htl-bar.l{background:linear-gradient(90deg,transparent,var(--dorado));} .htl-bar.r{background:linear-gradient(90deg,var(--dorado),transparent);}
+.htl-text { font-family:'Share Tech Mono',monospace; font-size:clamp(.5rem,1.5vw,.65rem); letter-spacing:clamp(.15em,1vw,.4em); color:var(--dorado); opacity:.8; }
+.hero-eagle { font-size:clamp(4.5rem,14vw,7.5rem); line-height:1; filter:drop-shadow(0 0 30px rgba(200,168,75,.45)); opacity:0; animation:fadeUp .8s ease .25s forwards; }
+.hero-pre { font-size:clamp(.7rem,2vw,.9rem); font-weight:300; letter-spacing:clamp(.2em,1.5vw,.7em); color:var(--gris-clr); text-transform:uppercase; margin-top:.4rem; opacity:0; animation:fadeUp .8s ease .35s forwards; }
+.hero-titulo { font-family:'Bebas Neue',cursive; font-size:clamp(4.5rem,18vw,9rem); line-height:.88; letter-spacing:.06em; background:linear-gradient(150deg,var(--oro) 0%,var(--dorado) 50%,var(--oro-dark) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; opacity:0; animation:fadeUp .8s ease .4s forwards; }
+.hero-org { font-size:clamp(.7rem,2vw,.9rem); font-weight:600; letter-spacing:clamp(.15em,1.2vw,.45em); color:var(--rojo); text-transform:uppercase; margin-top:.3rem; opacity:0; animation:fadeUp .8s ease .5s forwards; }
+.hero-divider { display:flex; align-items:center; gap:.8rem; margin:1.8rem auto; max-width:320px; opacity:0; animation:fadeUp .8s ease .6s forwards; }
+.hd-line { flex:1; height:1px; } .hd-line.l{background:linear-gradient(90deg,transparent,rgba(200,168,75,.5));} .hd-line.r{background:linear-gradient(90deg,rgba(200,168,75,.5),transparent);}
+.hd-diamond { width:7px; height:7px; background:var(--dorado); transform:rotate(45deg); flex-shrink:0; }
+.hero-slogan { font-family:'Bebas Neue',cursive; font-size:clamp(1rem,3.5vw,1.7rem); letter-spacing:clamp(.05em,1vw,.2em); color:rgba(237,234,226,.7); opacity:0; animation:fadeUp .8s ease .7s forwards; }
+.hero-stats { display:flex; margin:2rem auto 0; border:1px solid rgba(200,168,75,.14); max-width:500px; overflow:hidden; opacity:0; animation:fadeUp .8s ease .85s forwards; }
+.hs { flex:1; padding:.9rem .5rem; border-right:1px solid rgba(200,168,75,.1); background:rgba(200,168,75,.03); text-align:center; }
+.hs:last-child{border-right:none;}
+.hs-n { font-family:'Bebas Neue',cursive; font-size:1.9rem; color:var(--dorado); display:block; line-height:1; }
+.hs-l { font-family:'Share Tech Mono',monospace; font-size:.55rem; letter-spacing:.25em; color:var(--gris); display:block; margin-top:2px; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-body {
-  background: var(--negro);
-  color: var(--blanco);
-  font-family: 'Barlow Condensed', sans-serif;
-  overflow-x: hidden;
-  line-height: 1.5;
-}
+/* NAV */
+.nav-interna { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; padding:2rem 1.5rem; max-width:900px; margin:0 auto; opacity:0; animation:fadeUp .8s ease 1s forwards; }
+.nav-btn { font-family:'Share Tech Mono',monospace; font-size:.62rem; letter-spacing:.3em; color:var(--gris-clr); background:transparent; border:1px solid rgba(200,168,75,.2); padding:5px 14px; cursor:pointer; text-decoration:none; transition:all .25s; }
+.nav-btn:hover { background:rgba(200,168,75,.08); color:var(--dorado); border-color:var(--dorado); }
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--negro); }
-::-webkit-scrollbar-thumb { background: var(--dorado); }
+/* SECCIONES */
+.seccion { max-width:1000px; margin:0 auto; padding:5rem 1.5rem; }
+.sec-sep { display:flex; align-items:center; gap:1rem; padding:0 1.5rem; max-width:1000px; margin:0 auto; }
+.ssl { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(200,168,75,.2),transparent); }
+.ssi { font-size:1rem; opacity:.3; }
+.sec-label { font-family:'Share Tech Mono',monospace; font-size:.65rem; letter-spacing:.45em; color:var(--dorado); margin-bottom:.4rem; }
+.sec-titulo { font-family:'Bebas Neue',cursive; font-size:clamp(2.5rem,6vw,4.5rem); letter-spacing:.04em; line-height:.95; color:var(--blanco); margin-bottom:.5rem; }
+.sec-titulo span { color:var(--dorado); }
+.sec-bajada { font-size:1rem; font-weight:300; color:var(--gris-clr); margin-bottom:2.5rem; max-width:580px; }
+.sec-div { width:100%; height:1px; margin-bottom:2.5rem; background:linear-gradient(90deg,rgba(200,168,75,.35),transparent); }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .65s ease,transform .65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
 
-/* ══════════════════════════════════════
-   HERO
-══════════════════════════════════════ */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  padding: 2rem 1.5rem;
-  text-align: center;
-}
+/* JERARQUÍA */
+.jr-lista { display:flex; flex-direction:column; }
+.jr-row { display:grid; grid-template-columns:50px 1fr auto; align-items:center; gap:1.2rem; padding:1.1rem 1.2rem; border-left:3px solid transparent; border-bottom:1px solid rgba(255,255,255,.04); position:relative; overflow:hidden; transition:all .25s; cursor:default; }
+.jr-row::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(200,168,75,.04),transparent); opacity:0; transition:opacity .25s; }
+.jr-row:hover::before{opacity:1;} .jr-row:hover{border-left-color:var(--dorado);transform:translateX(3px);}
+.jr-top { border-left-color:var(--dorado); background:rgba(200,168,75,.05); }
+.jr-num { font-family:'Bebas Neue',cursive; font-size:2rem; color:rgba(255,255,255,.1); text-align:center; }
+.jr-nombre { font-size:1.1rem; font-weight:700; color:var(--blanco); }
+.jr-desc { font-size:.9rem; color:var(--gris); margin-top:2px; }
+.jr-badge { font-family:'Share Tech Mono',monospace; font-size:.6rem; letter-spacing:.25em; padding:2px 8px; border:1px solid; white-space:nowrap; flex-shrink:0; }
+@media(max-width:600px){.jr-row{grid-template-columns:36px 1fr;}.jr-badge{display:none;}}
 
-.hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,168,75,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(139,26,26,0.12) 0%, transparent 60%),
-    linear-gradient(180deg, #07090c 0%, #0a0f16 100%);
-}
+/* SEMANA */
+.semana-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:.5rem; }
+@media(max-width:600px){.semana-grid{grid-template-columns:repeat(4,1fr);}}
+.dia-card { background:var(--carbon); border:1px solid rgba(255,255,255,.05); padding:.9rem .5rem; text-align:center; }
+.dia-card.activo { border-color:rgba(200,168,75,.3); background:rgba(200,168,75,.05); }
+.dia-card.descanso { opacity:.35; }
+.dia-nombre { font-family:'Bebas Neue',cursive; font-size:1.1rem; letter-spacing:.1em; color:var(--dorado); margin-bottom:.4rem; }
+.dia-icon { font-size:1.3rem; margin-bottom:.3rem; }
+.dia-act { font-size:.82rem; color:var(--gris); line-height:1.4; }
+.dia-act strong { display:block; color:var(--gris-clr); font-weight:600; font-size:.85rem; }
 
-.hero-grid {
-  position: absolute; inset: 0; z-index: 0;
-  background-image:
-    linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
+/* SLOGANS */
+.sl-list { display:flex; flex-direction:column; gap:.6rem; }
+.sl-item { padding:1.1rem 1.5rem; border-left:3px solid var(--dorado); background:linear-gradient(90deg,rgba(200,168,75,.04),transparent); font-family:'Bebas Neue',cursive; font-size:clamp(1.2rem,3vw,1.75rem); letter-spacing:.08em; color:var(--blanco); transition:all .25s; }
+.sl-item:hover{transform:translateX(6px);border-left-color:var(--rojo);}
+.sl-item small { display:block; font-family:'Barlow Condensed',sans-serif; font-size:.75rem; letter-spacing:.2em; color:var(--gris); font-weight:300; margin-top:2px; }
 
-.hero-vignette {
-  position: absolute; inset: 0; z-index: 0;
-  background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.8) 100%);
-}
+/* OPERATIVOS */
+.ops-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.2rem; }
+.op-card { background:var(--carbon); border:1px solid rgba(255,255,255,.05); border-top:2px solid var(--dorado); padding:1.6rem; transition:transform .25s,box-shadow .25s; }
+.op-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.5);}
+.op-emoji{font-size:2rem;margin-bottom:.6rem;display:block;}
+.op-nivel{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.35em;color:var(--rojo);margin-bottom:.3rem;}
+.op-titulo{font-family:'Bebas Neue',cursive;font-size:1.6rem;letter-spacing:.05em;color:var(--blanco);margin-bottom:.6rem;line-height:1.1;}
+.op-desc{font-size:.92rem;color:var(--gris-clr);line-height:1.6;margin-bottom:1rem;font-weight:300;}
+.op-tags{display:flex;flex-wrap:wrap;gap:.3rem;}
+.op-tag{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.2em;border:1px solid rgba(200,168,75,.25);color:var(--dorado);padding:2px 7px;}
+.nb{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:.2em;padding:1px 6px;margin-left:6px;vertical-align:middle;}
+.nb-a{color:var(--rojo);border:1px solid var(--rojo);background:rgba(204,40,40,.1);}
+.nb-m{color:var(--dorado);border:1px solid var(--dorado);background:rgba(200,168,75,.1);}
+.nb-b{color:#60a060;border:1px solid #60a060;background:rgba(80,140,80,.1);}
 
-/* Línea diagonal decorativa */
-.hero-diag {
-  position: absolute; inset: 0; z-index: 0; overflow: hidden;
-}
-.hero-diag::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -50%;
-  width: 200%; height: 2px;
-  background: linear-gradient(90deg, transparent 20%, rgba(200,168,75,0.12) 50%, transparent 80%);
-  transform: rotate(-8deg) translateY(35vh);
-}
-.hero-diag::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -50%;
-  width: 200%; height: 1px;
-  background: linear-gradient(90deg, transparent 10%, rgba(200,168,75,0.07) 50%, transparent 90%);
-  transform: rotate(-8deg) translateY(65vh);
-}
+/* SITUACIONES */
+.sit-card { background:var(--carbon); border:1px solid rgba(255,255,255,.05); border-left:3px solid var(--dorado); padding:1.5rem 1.8rem; margin-bottom:1.2rem; }
+.sit-num { font-family:'Share Tech Mono',monospace; font-size:.63rem; letter-spacing:.35em; color:var(--dorado); margin-bottom:.5rem; }
+.sit-q { font-size:1rem; color:var(--blanco); font-style:italic; margin-bottom:1rem; line-height:1.5; }
+.sit-q::before{content:'"';color:var(--dorado);font-size:1.2rem;line-height:0;vertical-align:-.2rem;margin-right:3px;}
+.sit-q::after{content:'"';color:var(--dorado);font-size:1.2rem;line-height:0;vertical-align:-.2rem;margin-left:3px;}
+.sit-rl{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.3em;color:var(--gris);margin-bottom:.4rem;}
+.sit-r{font-size:.92rem;color:var(--gris-clr);line-height:1.6;font-weight:300;}
+.sit-al{margin-top:.7rem;font-size:.88rem;color:var(--rojo);font-weight:300;line-height:1.5;}
+.sit-al::before{content:'⚠ ';}
+.ex-bloque{background:var(--carbon);border:1px solid rgba(255,255,255,.05);padding:1.6rem 1.8rem;margin-bottom:1.2rem;}
+.ex-titulo{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.4em;color:var(--dorado);text-transform:uppercase;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(200,168,75,.15);}
+.pregunta{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.95rem;color:var(--blanco);}
+.pregunta:last-child{border-bottom:none;}
+.pn{font-family:'Bebas Neue',cursive;font-size:1.2rem;color:var(--dorado);opacity:.5;min-width:24px;line-height:1.2;}
 
-/* Esquinas */
-.corner {
-  position: absolute; width: 36px; height: 36px; z-index: 2; opacity: 0.35;
-}
-.c-tl { top:18px; left:18px; border-top:1.5px solid var(--dorado); border-left:1.5px solid var(--dorado); }
-.c-tr { top:18px; right:18px; border-top:1.5px solid var(--dorado); border-right:1.5px solid var(--dorado); }
-.c-bl { bottom:18px; left:18px; border-bottom:1.5px solid var(--dorado); border-left:1.5px solid var(--dorado); }
-.c-br { bottom:18px; right:18px; border-bottom:1.5px solid var(--dorado); border-right:1.5px solid var(--dorado); }
+/* ESCENARIOS */
+.esc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;}
+.esc-card{background:var(--carbon);border:1px solid rgba(255,255,255,.05);border-top:2px solid var(--rojo);padding:1.6rem;}
+.esc-letra{font-family:'Bebas Neue',cursive;font-size:3rem;line-height:1;color:rgba(204,40,40,.15);margin-bottom:.2rem;}
+.esc-nombre{font-family:'Bebas Neue',cursive;font-size:1.3rem;letter-spacing:.05em;color:var(--blanco);margin-bottom:.7rem;line-height:1.1;}
+.esc-desc{font-size:.9rem;color:var(--gris-clr);line-height:1.6;font-weight:300;margin-bottom:.8rem;}
+.esc-eval{font-size:.85rem;line-height:1.5;padding:.6rem .8rem;background:rgba(204,40,40,.07);border-left:2px solid var(--rojo);}
+.esc-eval strong{color:var(--rojo);}
 
-.hero-content { position: relative; z-index: 3; width: 100%; max-width: 700px; }
+/* TABLA */
+.tabla{width:100%;border-collapse:collapse;font-size:.95rem;}
+.tabla th{background:var(--placa);color:var(--dorado);font-family:'Share Tech Mono',monospace;font-size:.63rem;letter-spacing:.3em;padding:.8rem 1rem;text-align:left;font-weight:400;border-bottom:1px solid rgba(200,168,75,.2);}
+.tabla td{padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--gris-clr);}
+.tabla tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+.tabla tr:last-child td{border-bottom:none;}
+.tabla td:first-child{color:var(--blanco);font-weight:600;}
+.tabla td.pt{font-family:'Bebas Neue',cursive;font-size:1.2rem;color:var(--dorado);white-space:nowrap;}
 
-.hero-badge {
-  display: inline-block;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(0.5rem, 1.8vw, 0.65rem);
-  letter-spacing: clamp(0.2em, 1vw, 0.5em);
-  color: var(--rojo);
-  border: 1px solid rgba(204,40,40,0.35);
-  padding: 3px 14px;
-  margin-bottom: 2rem;
-  animation: blink 3s infinite;
-}
+/* RESULTADOS */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.res-card{background:var(--carbon);border:1px solid rgba(255,255,255,.05);padding:1.5rem;text-align:center;}
+.res-icono{font-size:2rem;margin-bottom:.5rem;}
+.res-titulo{font-family:'Bebas Neue',cursive;font-size:1.5rem;letter-spacing:.08em;margin-bottom:.5rem;}
+.res-cond{font-size:.88rem;color:var(--gris-clr);line-height:1.5;font-weight:300;}
 
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+/* NOTA EVALUADOR */
+.nota-ev{background:var(--carbon);border:1px solid rgba(200,168,75,.15);border-left:4px solid var(--rojo);padding:1.8rem 2rem;margin-top:2rem;}
+.nota-titulo{font-family:'Bebas Neue',cursive;font-size:1.6rem;letter-spacing:.08em;color:var(--rojo);margin-bottom:1rem;}
+.nota-item{display:flex;gap:.8rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.92rem;color:var(--gris-clr);line-height:1.5;}
+.nota-item:last-child{border-bottom:none;}
+.nota-arr{color:var(--dorado);flex-shrink:0;margin-top:1px;}
 
-.hero-top-line {
-  display: flex; align-items: center; justify-content: center;
-  gap: 0.8rem; margin-bottom: 1rem;
-  opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
-}
-.hero-top-line-bar {
-  height: 1px; width: 60px;
-  background: linear-gradient(90deg, transparent, var(--dorado));
-}
-.hero-top-line-bar.r { background: linear-gradient(90deg, var(--dorado), transparent); }
-.hero-top-line-text {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(0.5rem, 1.5vw, 0.6rem);
-  letter-spacing: clamp(0.15em, 1vw, 0.4em);
-  color: var(--dorado); opacity: 0.8;
-}
+/* FORMULARIO */
+.form-wrap{display:flex;flex-direction:column;gap:1.2rem;}
+.fg{background:var(--carbon);border:1px solid rgba(255,255,255,.05);border-left:3px solid var(--dorado);padding:1.5rem 1.8rem;}
+.fg-titulo{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.4em;color:var(--dorado);margin-bottom:1rem;text-transform:uppercase;}
+.fi{margin-bottom:1.2rem;}
+.fi:last-child{margin-bottom:0;}
+.fl{font-size:1rem;color:var(--blanco);font-weight:600;margin-bottom:.5rem;display:block;}
+.fl span{color:var(--dorado);font-family:'Bebas Neue',cursive;font-size:1.1rem;margin-right:.5rem;}
+.finput,.fselect,.ftextarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(200,168,75,.2);color:var(--blanco);font-family:'Barlow Condensed',sans-serif;font-size:1rem;padding:.7rem 1rem;outline:none;transition:border-color .2s;appearance:none;}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--dorado);}
+.fselect{cursor:pointer;} .fselect option{background:#111;color:var(--blanco);}
+.ftextarea{resize:vertical;min-height:80px;}
+.radio-g{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.3rem;}
+.radio-l{display:flex;align-items:center;gap:.4rem;font-size:.92rem;color:var(--gris-clr);cursor:pointer;border:1px solid rgba(200,168,75,.15);padding:.4rem .8rem;transition:all .2s;}
+.radio-l:hover{border-color:var(--dorado);color:var(--blanco);}
+.radio-l input{accent-color:var(--dorado);}
+.btn-env{font-family:'Bebas Neue',cursive;font-size:1.5rem;letter-spacing:.2em;background:var(--dorado);color:var(--negro);border:none;padding:1rem 2.5rem;cursor:pointer;transition:all .25s;align-self:flex-start;margin-top:.5rem;}
+.btn-env:hover{background:var(--oro);transform:translateY(-2px);}
+.btn-env:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.fstatus{font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.2em;padding:.8rem 1.2rem;margin-top:1rem;display:none;}
+.fstatus.ok{background:rgba(45,106,45,.2);border:1px solid #4a9e4a;color:#4a9e4a;}
+.fstatus.err{background:rgba(204,40,40,.15);border:1px solid var(--rojo);color:var(--rojo);}
+.latas-row{display:grid;grid-template-columns:1fr repeat(3,75px) 28px;gap:.4rem;align-items:center;padding:.5rem .8rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);}
+.latas-row.ok{border-color:rgba(74,158,74,.3);background:rgba(45,106,45,.1);}
+.latas-row.err{border-color:rgba(204,40,40,.3);background:rgba(204,40,40,.08);}
+.latas-nombre{font-size:.88rem;color:var(--gris-clr);}
+.latas-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(200,168,75,.2);color:var(--blanco);font-family:'Share Tech Mono',monospace;font-size:.85rem;padding:.3rem .4rem;text-align:center;outline:none;transition:border-color .2s;}
+.latas-input:focus{border-color:var(--dorado);}
+.latas-input.ok{border-color:#4a9e4a;background:rgba(45,106,45,.15);color:#4a9e4a;}
+.latas-input.err{border-color:var(--rojo);background:rgba(204,40,40,.1);color:var(--rojo);}
+.latas-icon{text-align:center;font-size:1rem;}
+.latas-header{display:grid;grid-template-columns:1fr repeat(3,75px) 28px;gap:.4rem;padding:.4rem .8rem;border-bottom:1px solid rgba(200,168,75,.15);margin-bottom:.3rem;}
+.latas-header span{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.2em;color:var(--dorado);text-align:center;}
+.latas-header span:first-child{text-align:left;}
 
-.hero-eagle {
-  font-size: clamp(4.5rem, 14vw, 7.5rem);
-  line-height: 1;
-  filter: drop-shadow(0 0 30px rgba(200,168,75,0.45));
-  opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards;
-}
+/* POSICIONAMIENTO */
+.mapa-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.5rem;margin-bottom:1.5rem;}
+.mapa-btn{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.2em;background:transparent;border:1px solid rgba(200,168,75,.2);color:var(--gris-clr);padding:.6rem .5rem;cursor:pointer;transition:all .2s;text-align:center;}
+.mapa-btn:hover,.mapa-btn.activo{border-color:var(--dorado);color:var(--dorado);background:rgba(200,168,75,.08);}
+.mapa-cont{background:var(--carbon);border:1px solid rgba(200,168,75,.15);position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:crosshair;user-select:none;}
+.mapa-canvas{width:100%;height:100%;display:block;}
+.mapa-ctrls{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1rem;align-items:center;}
+.mc-btn{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.2em;background:transparent;border:1px solid rgba(200,168,75,.25);color:var(--gris-clr);padding:.5rem 1rem;cursor:pointer;transition:all .2s;}
+.mc-btn:hover{border-color:var(--dorado);color:var(--dorado);}
+.mc-btn.danger{border-color:rgba(204,40,40,.3);color:var(--rojo);}
+.mc-btn.danger:hover{background:rgba(204,40,40,.1);}
+.leyenda{display:flex;flex-wrap:wrap;gap:1rem;margin-top:.8rem;}
+.ley-i{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--gris-clr);}
+.ley-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.mapa-nota{font-size:.85rem;color:var(--gris);margin-top:.5rem;line-height:1.5;}
 
-.hero-pre {
-  font-size: clamp(0.65rem, 2vw, 0.85rem);
-  font-weight: 300;
-  letter-spacing: clamp(0.2em, 1.5vw, 0.7em);
-  color: var(--gris-clr);
-  text-transform: uppercase;
-  margin-top: 0.4rem;
-  opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
-}
+/* DISCORD */
+.dc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.dc-cat{background:var(--carbon);border:1px solid rgba(255,255,255,.05);padding:1.3rem;}
+.dc-cat-t{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.35em;color:var(--dorado);text-transform:uppercase;padding-bottom:.6rem;margin-bottom:.8rem;border-bottom:1px solid rgba(200,168,75,.15);}
+.dc-canal{font-size:.9rem;color:var(--gris);padding:3px 0;display:flex;align-items:center;gap:.4rem;}
+.dc-canal.esp{color:var(--dorado);}
+.dc-pre{color:rgba(255,255,255,.2);font-weight:700;font-size:.9rem;}
 
-.hero-titulo {
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(4.5rem, 18vw, 9rem);
-  line-height: 0.88;
-  letter-spacing: 0.06em;
-  background: linear-gradient(150deg, var(--oro) 0%, var(--dorado) 50%, var(--oro-dark) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
-}
+/* PRESENTACIÓN */
+.pres-box{background:linear-gradient(135deg,var(--carbon) 0%,var(--panel) 100%);border:1px solid rgba(200,168,75,.18);border-top:3px solid var(--dorado);padding:2.5rem;position:relative;overflow:hidden;}
+.pres-box::after{content:'🦅';position:absolute;right:1.5rem;top:1.5rem;font-size:5rem;opacity:.04;transform:rotate(8deg);pointer-events:none;}
+.pl{margin-bottom:.5rem;font-size:.95rem;color:var(--gris-clr);line-height:1.7;}
+.pl.titulo{font-family:'Bebas Neue',cursive;font-size:1.6rem;letter-spacing:.1em;color:var(--dorado);margin-bottom:.2rem;}
+.pl.sep{color:var(--dorado);opacity:.4;letter-spacing:.1em;}
+.pl.sec{font-weight:700;color:var(--blanco);font-size:1rem;margin-top:.5rem;}
+.pl.final{font-family:'Bebas Neue',cursive;font-size:1.3rem;letter-spacing:.12em;color:var(--dorado);margin-top:.5rem;}
 
-.hero-org {
-  font-size: clamp(0.65rem, 2vw, 0.85rem);
-  font-weight: 600;
-  letter-spacing: clamp(0.15em, 1.2vw, 0.45em);
-  color: var(--rojo);
-  text-transform: uppercase;
-  margin-top: 0.3rem;
-  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
-}
-
-.hero-divider {
-  display: flex; align-items: center; gap: 0.8rem;
-  margin: 1.8rem auto; max-width: 320px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
-}
-.hero-divider-line { flex:1; height:1px; }
-.hero-divider-line.l { background: linear-gradient(90deg, transparent, rgba(200,168,75,0.5)); }
-.hero-divider-line.r { background: linear-gradient(90deg, rgba(200,168,75,0.5), transparent); }
-.hero-divider-diamond {
-  width: 7px; height: 7px;
-  background: var(--dorado); transform: rotate(45deg); flex-shrink: 0;
-}
-
-.hero-slogan {
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(0.95rem, 3.5vw, 1.7rem);
-  letter-spacing: clamp(0.05em, 1vw, 0.2em);
-  color: rgba(237,234,226,0.7);
-  opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
-}
-
-.hero-stats {
-  display: flex; margin: 2rem auto 0;
-  border: 1px solid rgba(200,168,75,0.14);
-  max-width: 500px; overflow: hidden;
-  opacity: 0; animation: fadeUp 0.8s ease 0.85s forwards;
-}
-.hero-stat {
-  flex: 1; padding: 0.9rem 0.5rem;
-  border-right: 1px solid rgba(200,168,75,0.1);
-  background: rgba(200,168,75,0.03);
-  text-align: center;
-}
-.hero-stat:last-child { border-right: none; }
-.hero-stat-n {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.9rem; color: var(--dorado); display: block; line-height: 1;
-}
-.hero-stat-l {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.52rem; letter-spacing: 0.25em; color: var(--gris); display: block; margin-top: 2px;
-}
-
-/* NAV INTERNA */
-.nav-interna {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 0.5rem; padding: 2rem 1.5rem;
-  max-width: 800px; margin: 0 auto;
-  opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
-}
-.nav-btn {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.3em;
-  color: var(--gris-clr); background: transparent;
-  border: 1px solid rgba(200,168,75,0.2);
-  padding: 5px 14px; cursor: pointer;
-  text-decoration: none; transition: all 0.25s;
-}
-.nav-btn:hover { background: rgba(200,168,75,0.08); color: var(--dorado); border-color: var(--dorado); }
-
-@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-
-/* ══════════════════════════════════════
-   SECCIONES GENÉRICAS
-══════════════════════════════════════ */
-.seccion {
-  max-width: 1000px; margin: 0 auto;
-  padding: 5rem 1.5rem;
-}
-
-.sec-sep {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 0 1.5rem; max-width: 1000px; margin: 0 auto;
-}
-.sec-sep-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200,168,75,0.2), transparent);
-}
-.sec-sep-icon { font-size: 1rem; opacity: 0.3; }
-
-.sec-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.45em;
-  color: var(--dorado); margin-bottom: 0.4rem;
-}
-.sec-titulo {
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  letter-spacing: 0.04em; line-height: 0.95;
-  color: var(--blanco); margin-bottom: 0.5rem;
-}
-.sec-titulo span { color: var(--dorado); }
-.sec-bajada {
-  font-size: 0.92rem; font-weight: 300;
-  color: var(--gris-clr); margin-bottom: 2.5rem;
-  max-width: 580px;
-}
-.sec-divider {
-  width: 100%; height: 1px; margin-bottom: 2.5rem;
-  background: linear-gradient(90deg, rgba(200,168,75,0.35), transparent);
-}
-
-/* ══════════════════════════════════════
-   RANGOS
-══════════════════════════════════════ */
-.rangos-tabla { display: flex; flex-direction: column; gap: 0; }
-
-.rango-row {
-  display: grid;
-  grid-template-columns: 44px 1fr auto;
-  align-items: center; gap: 1.2rem;
-  padding: 1rem 1.2rem;
-  border-left: 3px solid transparent;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  position: relative; overflow: hidden;
-  transition: all 0.25s;
-  cursor: default;
-}
-.rango-row::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(200,168,75,0.04), transparent);
-  opacity: 0; transition: opacity 0.25s;
-}
-.rango-row:hover::before { opacity: 1; }
-.rango-row:hover { border-left-color: var(--dorado); transform: translateX(3px); }
-.rango-row.top { border-left-color: var(--dorado); background: rgba(200,168,75,0.04); }
-
-.rango-num {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.8rem; color: rgba(255,255,255,0.1); text-align: center;
-}
-.rango-info { min-width: 0; }
-.rango-nombre {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1rem; font-weight: 700;
-  color: var(--blanco); line-height: 1.1;
-}
-.rango-desc {
-  font-size: 0.82rem; color: var(--gris); margin-top: 2px;
-}
-.rango-stars { font-size: 0.6rem; color: var(--dorado); letter-spacing: 2px; margin-top: 3px; }
-.rango-paga {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.3rem; color: var(--dorado);
-  white-space: nowrap; text-align: right; flex-shrink: 0;
-}
-.rango-paga small {
-  display: block; font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.65rem; color: var(--gris); font-weight: 300;
-}
-
-/* ══════════════════════════════════════
-   SEMANA
-══════════════════════════════════════ */
-.semana-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
-}
-@media(max-width:600px) {
-  .semana-grid { grid-template-columns: repeat(4, 1fr); }
-  .rango-row { grid-template-columns: 36px 1fr; }
-  .rango-paga { display: none; }
-}
-.dia-card {
-  background: var(--carbon);
-  border: 1px solid rgba(255,255,255,0.05);
-  padding: 0.9rem 0.5rem;
-  text-align: center;
-  transition: all 0.2s;
-}
-.dia-card.activo { border-color: rgba(200,168,75,0.3); background: rgba(200,168,75,0.05); }
-.dia-card.descanso { opacity: 0.35; }
-.dia-nombre {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1rem; letter-spacing: 0.1em; color: var(--dorado);
-  margin-bottom: 0.4rem;
-}
-.dia-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
-.dia-act { font-size: 0.75rem; color: var(--gris); line-height: 1.4; }
-.dia-act strong { display: block; color: var(--gris-clr); font-weight: 600; font-size: 0.78rem; }
-
-/* ══════════════════════════════════════
-   SLOGANS
-══════════════════════════════════════ */
-.slogans-list { display: flex; flex-direction: column; gap: 0.6rem; }
-.slogan-item {
-  padding: 1rem 1.5rem;
-  border-left: 3px solid var(--dorado);
-  background: linear-gradient(90deg, rgba(200,168,75,0.04), transparent);
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(1.1rem, 3vw, 1.65rem);
-  letter-spacing: 0.08em; color: var(--blanco);
-  transition: all 0.25s;
-}
-.slogan-item:hover { transform: translateX(6px); border-left-color: var(--rojo); }
-.slogan-item small {
-  display: block; font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.7rem; letter-spacing: 0.2em;
-  color: var(--gris); font-weight: 300; margin-top: 2px;
-}
-
-/* ══════════════════════════════════════
-   OPERATIVOS
-══════════════════════════════════════ */
-.ops-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.2rem;
-}
-.op-card {
-  background: var(--carbon);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-top: 2px solid var(--dorado);
-  padding: 1.6rem;
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-.op-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 16px rgba(200,168,75,0.07);
-}
-.op-emoji { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
-.op-nivel {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.58rem; letter-spacing: 0.35em;
-  color: var(--rojo); margin-bottom: 0.3rem;
-}
-.op-titulo {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.5rem; letter-spacing: 0.05em;
-  color: var(--blanco); margin-bottom: 0.6rem; line-height: 1.1;
-}
-.op-desc {
-  font-size: 0.86rem; color: var(--gris-clr);
-  line-height: 1.6; margin-bottom: 1rem; font-weight: 300;
-}
-.op-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-.op-tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.55rem; letter-spacing: 0.2em;
-  border: 1px solid rgba(200,168,75,0.25);
-  color: var(--dorado); padding: 2px 7px;
-}
-
-/* nivel badge */
-.nivel-badge {
-  display: inline-block; font-family: 'Share Tech Mono', monospace;
-  font-size: 0.52rem; letter-spacing: 0.2em;
-  padding: 1px 6px; margin-left: 6px; vertical-align: middle;
-}
-.nb-alto  { color: var(--rojo); border: 1px solid var(--rojo); background: rgba(204,40,40,0.1); }
-.nb-medio { color: var(--dorado); border: 1px solid var(--dorado); background: rgba(200,168,75,0.1); }
-.nb-bajo  { color: #60a060; border: 1px solid #60a060; background: rgba(80,140,80,0.1); }
-
-/* ══════════════════════════════════════
-   EXAMEN ESCRITO
-══════════════════════════════════════ */
-.examen-bloque {
-  background: var(--carbon);
-  border: 1px solid rgba(255,255,255,0.05);
-  padding: 1.6rem 1.8rem;
-  margin-bottom: 1.2rem;
-}
-.examen-bloque-titulo {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.4em; color: var(--dorado);
-  text-transform: uppercase; margin-bottom: 1rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid rgba(200,168,75,0.15);
-}
-.pregunta {
-  display: flex; gap: 0.8rem; align-items: flex-start;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  font-size: 0.9rem; color: var(--blanco);
-}
-.pregunta:last-child { border-bottom: none; }
-.pregunta-n {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.1rem; color: var(--dorado);
-  opacity: 0.5; min-width: 24px; line-height: 1.2;
-}
-.pregunta-texto { line-height: 1.5; }
-
-/* ══════════════════════════════════════
-   SITUACIONES (FILTRO)
-══════════════════════════════════════ */
-.situacion-card {
-  background: var(--carbon);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-left: 3px solid var(--dorado);
-  padding: 1.5rem 1.8rem;
-  margin-bottom: 1.2rem;
-}
-.sit-num {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.35em;
-  color: var(--dorado); margin-bottom: 0.5rem;
-}
-.sit-pregunta {
-  font-size: 0.95rem; color: var(--blanco);
-  font-style: italic; margin-bottom: 1rem;
-  line-height: 1.5; font-weight: 400;
-}
-.sit-pregunta::before { content: '"'; color: var(--dorado); font-size: 1.2rem; line-height: 0; vertical-align: -0.2rem; margin-right: 3px; }
-.sit-pregunta::after  { content: '"'; color: var(--dorado); font-size: 1.2rem; line-height: 0; vertical-align: -0.2rem; margin-left: 3px; }
-
-.sit-respuesta-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.58rem; letter-spacing: 0.3em;
-  color: var(--gris); margin-bottom: 0.4rem;
-}
-.sit-respuesta { font-size: 0.85rem; color: var(--gris-clr); line-height: 1.6; font-weight: 300; }
-.sit-alerta {
-  margin-top: 0.7rem;
-  font-size: 0.82rem; color: var(--rojo);
-  font-weight: 300; line-height: 1.5;
-}
-.sit-alerta::before { content: '⚠ '; }
-
-/* ══════════════════════════════════════
-   ROL EN VIVO — ESCENARIOS
-══════════════════════════════════════ */
-.escenarios-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.2rem;
-}
-.escenario-card {
-  background: var(--carbon);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-top: 2px solid var(--rojo);
-  padding: 1.6rem;
-}
-.esc-letra {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 3rem; line-height: 1;
-  color: rgba(204,40,40,0.15); margin-bottom: 0.2rem;
-}
-.esc-nombre {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.25rem; letter-spacing: 0.05em;
-  color: var(--blanco); margin-bottom: 0.7rem; line-height: 1.1;
-}
-.esc-desc { font-size: 0.86rem; color: var(--gris-clr); line-height: 1.6; font-weight: 300; margin-bottom: 0.8rem; }
-.esc-eval {
-  font-size: 0.8rem; line-height: 1.5;
-  padding: 0.6rem 0.8rem;
-  background: rgba(204,40,40,0.07);
-  border-left: 2px solid var(--rojo);
-}
-.esc-eval strong { color: var(--rojo); }
-
-/* ══════════════════════════════════════
-   TABLA PUNTAJES
-══════════════════════════════════════ */
-.tabla-puntaje {
-  width: 100%; border-collapse: collapse;
-  font-size: 0.88rem;
-}
-.tabla-puntaje th {
-  background: var(--placa);
-  color: var(--dorado);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.3em;
-  padding: 0.7rem 1rem;
-  text-align: left; font-weight: 400;
-  border-bottom: 1px solid rgba(200,168,75,0.2);
-}
-.tabla-puntaje td {
-  padding: 0.7rem 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  color: var(--gris-clr);
-}
-.tabla-puntaje tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-.tabla-puntaje tr:last-child td { border-bottom: none; }
-.tabla-puntaje td:first-child { color: var(--blanco); font-weight: 600; }
-.tabla-puntaje td.puntaje {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.1rem; color: var(--dorado); white-space: nowrap;
-}
-.tabla-puntaje td.verde { color: #60a060; font-weight: 700; }
-.tabla-puntaje td.amarillo { color: var(--dorado); font-weight: 700; }
-.tabla-puntaje td.rojo { color: var(--rojo); font-weight: 700; }
-
-/* ══════════════════════════════════════
-   RESULTADOS
-══════════════════════════════════════ */
-.resultados-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-}
-.resultado-card {
-  background: var(--carbon);
-  border: 1px solid rgba(255,255,255,0.05);
-  padding: 1.5rem;
-  text-align: center;
-}
-.resultado-icono { font-size: 2rem; margin-bottom: 0.5rem; }
-.resultado-titulo {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.4rem; letter-spacing: 0.08em;
-  margin-bottom: 0.5rem;
-}
-.resultado-condicion { font-size: 0.82rem; color: var(--gris-clr); line-height: 1.5; font-weight: 300; }
-
-/* ══════════════════════════════════════
-   NOTAS EVALUADOR
-══════════════════════════════════════ */
-.nota-evaluador {
-  background: var(--carbon);
-  border: 1px solid rgba(200,168,75,0.15);
-  border-left: 4px solid var(--rojo);
-  padding: 1.8rem 2rem;
-  margin-top: 2rem;
-}
-.nota-titulo {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.5rem; letter-spacing: 0.08em;
-  color: var(--rojo); margin-bottom: 1rem;
-}
-.nota-item {
-  display: flex; gap: 0.8rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  font-size: 0.88rem; color: var(--gris-clr); line-height: 1.5;
-}
-.nota-item:last-child { border-bottom: none; }
-.nota-arrow { color: var(--dorado); flex-shrink: 0; margin-top: 1px; }
-
-/* ══════════════════════════════════════
-   DISCORD
-══════════════════════════════════════ */
-.discord-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-}
-.discord-cat {
-  background: var(--carbon);
-  border: 1px solid rgba(255,255,255,0.05);
-  padding: 1.3rem;
-}
-.discord-cat-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.65rem; font-weight: 700;
-  letter-spacing: 0.35em; color: var(--dorado);
-  text-transform: uppercase;
-  padding-bottom: 0.6rem; margin-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(200,168,75,0.15);
-}
-.discord-canal {
-  font-size: 0.86rem; color: var(--gris);
-  padding: 3px 0; display: flex; align-items: center; gap: 0.4rem;
-}
-.discord-canal.especial { color: var(--dorado); }
-.discord-canal-prefix { color: rgba(255,255,255,0.2); font-weight: 700; font-size: 0.9rem; }
-
-/* ══════════════════════════════════════
-   PRESENTACIÓN
-══════════════════════════════════════ */
-.presentacion-box {
-  background: linear-gradient(135deg, var(--carbon) 0%, var(--panel) 100%);
-  border: 1px solid rgba(200,168,75,0.18);
-  border-top: 3px solid var(--dorado);
-  padding: 2.5rem;
-  position: relative; overflow: hidden;
-}
-.presentacion-box::after {
-  content: '🦅';
-  position: absolute; right: 1.5rem; top: 1.5rem;
-  font-size: 5rem; opacity: 0.04; transform: rotate(8deg);
-  pointer-events: none;
-}
-.presentacion-linea { margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--gris-clr); line-height: 1.7; }
-.presentacion-linea.titulo {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.5rem; letter-spacing: 0.1em;
-  color: var(--dorado); margin-bottom: 0.2rem;
-}
-.presentacion-linea.sep {
-  color: var(--dorado); opacity: 0.4; letter-spacing: 0.1em;
-}
-.presentacion-linea.seccion {
-  font-weight: 700; color: var(--blanco);
-  font-size: 0.95rem; margin-top: 0.5rem;
-}
-.presentacion-linea.final {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.2rem; letter-spacing: 0.12em;
-  color: var(--dorado); margin-top: 0.5rem;
-}
-.presentacion-linea.sub-final {
-  font-size: 0.8rem; color: var(--gris); margin-top: 2px;
-}
-
-/* ══════════════════════════════════════
-   FOOTER
-══════════════════════════════════════ */
-footer {
-  text-align: center;
-  padding: 3rem 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.4em;
-  color: rgba(255,255,255,0.15);
-}
-footer span { color: var(--dorado); }
-
-/* ══════════════════════════════════════
-   SCROLL REVEAL
-══════════════════════════════════════ */
-.reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
+footer{text-align:center;padding:3rem 1.5rem;border-top:1px solid rgba(255,255,255,.05);font-family:'Share Tech Mono',monospace;font-size:.63rem;letter-spacing:.4em;color:rgba(255,255,255,.15);}
+footer span{color:var(--dorado);}
 </style>
 </head>
 <body>
 
-<!-- ══════════ HERO ══════════ -->
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-diag"></div>
-  <div class="corner c-tl"></div><div class="corner c-tr"></div>
-  <div class="corner c-bl"></div><div class="corner c-br"></div>
-
+  <div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-vignette"></div>
+  <div class="corner c-tl"></div><div class="corner c-tr"></div><div class="corner c-bl"></div><div class="corner c-br"></div>
   <div class="hero-content">
     <div class="hero-badge">USO INTERNO — NIVEL ALFA</div>
-
-    <div class="hero-top-line">
-      <div class="hero-top-line-bar"></div>
-      <span class="hero-top-line-text">POLICÍA FEDERAL ARGENTINA</span>
-      <div class="hero-top-line-bar r"></div>
-    </div>
-
+    <div class="hero-top-line"><div class="htl-bar l"></div><span class="htl-text">POLICÍA FEDERAL ARGENTINA</span><div class="htl-bar r"></div></div>
     <div class="hero-eagle">🦅</div>
     <p class="hero-pre">Unidad Táctica de Élite</p>
     <h1 class="hero-titulo">HALCÓN</h1>
     <p class="hero-org">Subdivisión PFA · KilomboRP</p>
-
-    <div class="hero-divider">
-      <div class="hero-divider-line l"></div>
-      <div class="hero-divider-diamond"></div>
-      <div class="hero-divider-line r"></div>
-    </div>
-
+    <div class="hero-divider"><div class="hd-line l"></div><div class="hd-diamond"></div><div class="hd-line r"></div></div>
     <p class="hero-slogan">«Donde el Halcón vuela, la Ley prevalece»</p>
-
     <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-n">7</span>
-        <span class="hero-stat-l">Rangos</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-n">8</span>
-        <span class="hero-stat-l">Operativos</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-n">24/7</span>
-        <span class="hero-stat-l">Activos</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-n">01</span>
-        <span class="hero-stat-l">Director</span>
-      </div>
+      <div class="hs"><span class="hs-n">8</span><span class="hs-l">Rangos</span></div>
+      <div class="hs"><span class="hs-n">8</span><span class="hs-l">Operativos</span></div>
+      <div class="hs"><span class="hs-n">24/7</span><span class="hs-l">Activos</span></div>
+      <div class="hs"><span class="hs-n">02</span><span class="hs-l">Directores</span></div>
     </div>
   </div>
 </div>
 
-<!-- NAV -->
 <nav class="nav-interna">
+  <a href="#jerarquia" class="nav-btn">JERARQUÍA</a>
   <a href="#semana" class="nav-btn">SEMANA</a>
   <a href="#slogans" class="nav-btn">SLOGANS</a>
   <a href="#operativos" class="nav-btn">OPERATIVOS</a>
   <a href="#seleccion" class="nav-btn">SELECCIÓN</a>
   <a href="#evaluacion" class="nav-btn">EVALUACIÓN</a>
+  <a href="#examen" class="nav-btn">EXAMEN</a>
+  <a href="#posicionamiento" class="nav-btn">POSICIONAMIENTO</a>
   <a href="#discord" class="nav-btn">DISCORD</a>
   <a href="#presentacion" class="nav-btn">PRESENTACIÓN</a>
 </nav>
 
+<!-- JERARQUÍA -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">⭐</div><div class="ssl"></div></div>
+<section class="seccion reveal" id="jerarquia">
+  <div class="sec-label">Estructura de mando</div>
+  <div class="sec-titulo">JERARQUÍA <span>HALCÓN</span></div>
+  <p class="sec-bajada">Rangos oficiales del Grupo Halcón dentro de KilomboRP.</p>
+  <div class="sec-div"></div>
+  <div class="jr-lista">
+    <div class="jr-row jr-top"><div class="jr-num">01</div><div><div class="jr-nombre">🦅 Dueño/a Halcón</div><div class="jr-desc">Máxima autoridad del grupo. Decisiones finales sobre estructura y operativos.</div></div><div class="jr-badge" style="color:var(--oro);border-color:var(--oro)">DUEÑO</div></div>
+    <div class="jr-row"><div class="jr-num">02</div><div><div class="jr-nombre">🔱 Director/a Halcón</div><div class="jr-desc">Dirige operaciones diarias. Coordina todos los rangos y aprueba ascensos.</div></div><div class="jr-badge" style="color:#e8c558;border-color:#e8c558">DIRECTOR</div></div>
+    <div class="jr-row"><div class="jr-num">03</div><div><div class="jr-nombre">🥇 Sub Jefe Halcón</div><div class="jr-desc">Segundo al Director. Opera en su ausencia y supervisa los jefes de campo.</div></div><div class="jr-badge" style="color:#c0c8d0;border-color:#c0c8d0">SUB JEFE</div></div>
+    <div class="jr-row"><div class="jr-num">04</div><div><div class="jr-nombre">🏅 Jefe Halcón</div><div class="jr-desc">Lidera equipos en campo. Responsable del desempeño de su escuadrón.</div></div><div class="jr-badge" style="color:#cd8f4a;border-color:#cd8f4a">JEFE</div></div>
+    <div class="jr-row"><div class="jr-num">05</div><div><div class="jr-nombre">🔰 Comandante Halcón</div><div class="jr-desc">Mando táctico en operativos. Coordina posicionamiento y comunicaciones.</div></div><div class="jr-badge" style="color:#7090b8;border-color:#7090b8">COMANDANTE</div></div>
+    <div class="jr-row"><div class="jr-num">06</div><div><div class="jr-nombre">🔷 Capitán Halcón</div><div class="jr-desc">Agente senior con experiencia probada. Puede tomar decisiones en campo.</div></div><div class="jr-badge" style="color:#70a870;border-color:#70a870">CAPITÁN</div></div>
+    <div class="jr-row"><div class="jr-num">07</div><div><div class="jr-nombre">🔹 Teniente Halcón</div><div class="jr-desc">Agente activo con examen aprobado. Participa en todos los operativos.</div></div><div class="jr-badge" style="color:#8090a0;border-color:#8090a0">TENIENTE</div></div>
+    <div class="jr-row"><div class="jr-num">08</div><div><div class="jr-nombre">🔸 Miembro Halcón</div><div class="jr-desc">Ingresante. Período de prueba. Observa, practica y rinde examen de ingreso.</div></div><div class="jr-badge" style="color:#a06050;border-color:#a06050">MIEMBRO</div></div>
+  </div>
+</section>
 
-
-<!-- ══════════ SEMANA ══════════ -->
-<div class="sec-sep"><div class="sec-sep-line"></div><div class="sec-sep-icon">📅</div><div class="sec-sep-line"></div></div>
+<!-- SEMANA -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">📅</div><div class="ssl"></div></div>
 <section class="seccion reveal" id="semana">
   <div class="sec-label">Planificación</div>
   <div class="sec-titulo">DIAGRAMA DE <span>SEMANA</span></div>
   <p class="sec-bajada">Estructura base de cada semana. Los operativos específicos se anuncian el lunes en #briefing-semanal.</p>
-  <div class="sec-divider"></div>
+  <div class="sec-div"></div>
   <div class="semana-grid">
-    <div class="dia-card activo">
-      <div class="dia-icon">📋</div>
-      <div class="dia-nombre">LUN</div>
-      <div class="dia-act"><strong>Reunión semanal</strong>Asignación de roles · Revista de personal</div>
-    </div>
-    <div class="dia-card activo">
-      <div class="dia-icon">🎯</div>
-      <div class="dia-nombre">MAR</div>
-      <div class="dia-act"><strong>Entrenamiento</strong>Simulacros · Exámenes de cadetes</div>
-    </div>
-    <div class="dia-card activo">
-      <div class="dia-icon">🚔</div>
-      <div class="dia-nombre">MIÉ</div>
-      <div class="dia-act"><strong>OPERATIVO</strong>Rol activo · Patrulla organizada</div>
-    </div>
-    <div class="dia-card">
-      <div class="dia-icon">📝</div>
-      <div class="dia-nombre">JUE</div>
-      <div class="dia-act"><strong>Informes</strong>Sanciones · Ascensos · Libre</div>
-    </div>
-    <div class="dia-card activo">
-      <div class="dia-icon">🦅</div>
-      <div class="dia-nombre">VIE</div>
-      <div class="dia-act"><strong>OP. ESPECIAL</strong>Alto impacto · Toda la unidad</div>
-    </div>
-    <div class="dia-card activo">
-      <div class="dia-icon">🏆</div>
-      <div class="dia-nombre">SÁB</div>
-      <div class="dia-act"><strong>GRAN EVENTO</strong>Máxima visibilidad pública</div>
-    </div>
-    <div class="dia-card descanso">
-      <div class="dia-icon">😴</div>
-      <div class="dia-nombre">DOM</div>
-      <div class="dia-act"><strong>Descanso</strong>Guardia mínima voluntaria</div>
-    </div>
+    <div class="dia-card activo"><div class="dia-icon">📋</div><div class="dia-nombre">LUN</div><div class="dia-act"><strong>Reunión semanal</strong>Roles · Revista</div></div>
+    <div class="dia-card activo"><div class="dia-icon">🎯</div><div class="dia-nombre">MAR</div><div class="dia-act"><strong>Entrenamiento</strong>Simulacros · Exámenes</div></div>
+    <div class="dia-card activo"><div class="dia-icon">🚔</div><div class="dia-nombre">MIÉ</div><div class="dia-act"><strong>OPERATIVO</strong>Rol activo · Patrulla</div></div>
+    <div class="dia-card"><div class="dia-icon">📝</div><div class="dia-nombre">JUE</div><div class="dia-act"><strong>Informes</strong>Sanciones · Ascensos</div></div>
+    <div class="dia-card activo"><div class="dia-icon">🦅</div><div class="dia-nombre">VIE</div><div class="dia-act"><strong>OP. ESPECIAL</strong>Alto impacto</div></div>
+    <div class="dia-card activo"><div class="dia-icon">🏆</div><div class="dia-nombre">SÁB</div><div class="dia-act"><strong>GRAN EVENTO</strong>Máxima visibilidad</div></div>
+    <div class="dia-card descanso"><div class="dia-icon">😴</div><div class="dia-nombre">DOM</div><div class="dia-act"><strong>Descanso</strong>Guardia voluntaria</div></div>
   </div>
 </section>
 
-<!-- ══════════ SLOGANS ══════════ -->
-<div class="sec-sep"><div class="sec-sep-line"></div><div class="sec-sep-icon">🦅</div><div class="sec-sep-line"></div></div>
+<!-- SLOGANS -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">🦅</div><div class="ssl"></div></div>
 <section class="seccion reveal" id="slogans">
   <div class="sec-label">Identidad del grupo</div>
   <div class="sec-titulo">SLOGANS <span>OFICIALES</span></div>
-  <div class="sec-divider"></div>
-  <div class="slogans-list">
-    <div class="slogan-item">«Donde el Halcón vuela, la Ley prevalece»<small>Slogan principal</small></div>
-    <div class="slogan-item">«Élite no es un título. Es una forma de operar»<small>Reclutamiento</small></div>
-    <div class="slogan-item">«El Halcón no descansa. La ciudad tampoco duerme»<small>Operativo</small></div>
-    <div class="slogan-item">«Disciplina, lealtad, precisión. Esto es Halcón»<small>Lema de valores</small></div>
-    <div class="slogan-item">«Pocos lo intentan. Menos lo logran. Bienvenido a Halcón»<small>Ingreso</small></div>
-    <div class="slogan-item">«Cada operativo es una oportunidad de marcar la diferencia»<small>Motivacional</small></div>
+  <div class="sec-div"></div>
+  <div class="sl-list">
+    <div class="sl-item">«Donde el Halcón vuela, la Ley prevalece»<small>Slogan principal</small></div>
+    <div class="sl-item">«Élite no es un título. Es una forma de operar»<small>Reclutamiento</small></div>
+    <div class="sl-item">«El Halcón no descansa. La ciudad tampoco duerme»<small>Operativo</small></div>
+    <div class="sl-item">«Disciplina, lealtad, precisión. Esto es Halcón»<small>Lema de valores</small></div>
+    <div class="sl-item">«Pocos lo intentan. Menos lo logran. Bienvenido a Halcón»<small>Ingreso</small></div>
+    <div class="sl-item">«Cada operativo es una oportunidad de marcar la diferencia»<small>Motivacional</small></div>
   </div>
 </section>
 
-<!-- ══════════ OPERATIVOS ══════════ -->
-<div class="sec-sep"><div class="sec-sep-line"></div><div class="sec-sep-icon">🚨</div><div class="sec-sep-line"></div></div>
+<!-- OPERATIVOS -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">🚨</div><div class="ssl"></div></div>
 <section class="seccion reveal" id="operativos">
   <div class="sec-label">Catálogo de roles</div>
   <div class="sec-titulo">OPERATIVOS <span>SEMANALES</span></div>
-  <p class="sec-bajada">Cada semana se activa uno o más. Se asignan por rango y disponibilidad. Los actores internos coordinan por privado antes de cada rol.</p>
-  <div class="sec-divider"></div>
+  <p class="sec-bajada">Cada semana se activa uno o más. Se asignan por rango y disponibilidad.</p>
+  <div class="sec-div"></div>
   <div class="ops-grid">
-    <div class="op-card">
-      <span class="op-emoji">🚐💰</span>
-      <div class="op-nivel">ALFA <span class="nivel-badge nb-alto">ALTO RIESGO</span></div>
-      <div class="op-titulo">CONVOY BLINDADO</div>
-      <div class="op-desc">Transporte de armamento y efectivo por rutas de la ciudad. Formación vehicular, radio activa, detección de seguimientos. Los civiles pueden intentar el asalto.</div>
-      <div class="op-tags"><span class="op-tag">Formación vehicular</span><span class="op-tag">Radio activa</span><span class="op-tag">Toda la unidad</span></div>
-    </div>
-    <div class="op-card">
-      <span class="op-emoji">🎙️🛡️</span>
-      <div class="op-nivel">BRAVO <span class="nivel-badge nb-alto">ALTO RIESGO</span></div>
-      <div class="op-titulo">ESCOLTA VIP / STREAMER</div>
-      <div class="op-desc">Personalidad importante solicita protección. Escolta personal, perímetro de seguridad y protocolo de evacuación. Fans o rivales pueden intentar acercarse.</div>
-      <div class="op-tags"><span class="op-tag">Escolta</span><span class="op-tag">Protocolo VIP</span><span class="op-tag">Comunicación</span></div>
-    </div>
-    <div class="op-card">
-      <span class="op-emoji">🔴📌</span>
-      <div class="op-nivel">CHARLIE <span class="nivel-badge nb-medio">MEDIO RIESGO</span></div>
-      <div class="op-titulo">CONTROL DE ZONA CALIENTE</div>
-      <div class="op-desc">Presencia permanente en zona conflictiva. Patrulla a pie, cacheos, control de identidad y registro de vehículos. Interacción directa con la ciudadanía.</div>
-      <div class="op-tags"><span class="op-tag">Patrulla a pie</span><span class="op-tag">Cacheos</span><span class="op-tag">Civil</span></div>
-    </div>
-    <div class="op-card">
-      <span class="op-emoji">🏦🔒</span>
-      <div class="op-nivel">DELTA <span class="nivel-badge nb-alto">ALTO RIESGO</span></div>
-      <div class="op-titulo">CUSTODIA BANCARIA</div>
-      <div class="op-desc">Escolta de traslado de fondos. Coordinación con el banco, anticipación de rutas. Si el traslado es atacado, activan protocolo de extracción.</div>
-      <div class="op-tags"><span class="op-tag">Ruta dinámica</span><span class="op-tag">Extracción</span><span class="op-tag">Coordinación</span></div>
-    </div>
-    <div class="op-card">
-      <span class="op-emoji">🚗💨</span>
-      <div class="op-nivel">ECHO <span class="nivel-badge nb-alto">ALTO RIESGO</span></div>
-      <div class="op-titulo">PERSECUCIÓN DE ALTO RIESGO</div>
-      <div class="op-desc">Un vehículo no detiene la marcha ante una orden policial y escapa. El Halcón coordina cierre de calles, comunica por radio y ejecuta el corte sin causar daños civiles. El conductor puede rendirse o resistir.</div>
-      <div class="op-tags"><span class="op-tag">Cierre de calles</span><span class="op-tag">Radio activa</span><span class="op-tag">Coordinación</span></div>
-    </div>
-    <div class="op-card">
-      <span class="op-emoji">🆘</span>
-      <div class="op-nivel">FOXTROT <span class="nivel-badge nb-bajo">BAJA PELIGROSIDAD</span></div>
-      <div class="op-titulo">RESCATE DE REHÉN</div>
-      <div class="op-desc">Civil tomado de rehén. El Halcón negocia, establece perímetro y ejecuta extracción con mínimas bajas. Puede incluir negociador especializado.</div>
-      <div class="op-tags"><span class="op-tag">Negociación</span><span class="op-tag">Perímetro</span><span class="op-tag">Extracción</span></div>
-    </div>
-    <div class="op-card">
-      <span class="op-emoji">🌆🚔</span>
-      <div class="op-nivel">GOLF <span class="nivel-badge nb-bajo">PRESENCIA DIARIA</span></div>
-      <div class="op-titulo">PATRULLA URBANA VISIBLE</div>
-      <div class="op-desc">Recorrido en formación por la ciudad, interacción con la comunidad, respuesta a llamados. Da visibilidad al Halcón y genera rol orgánico cotidiano.</div>
-      <div class="op-tags"><span class="op-tag">Patrulla</span><span class="op-tag">Comunidad</span><span class="op-tag">Todo el grupo</span></div>
-    </div>
-    <div class="op-card">
-      <span class="op-emoji">🏦🚨</span>
-      <div class="op-nivel">HOTEL <span class="nivel-badge nb-alto">ALTO RIESGO</span></div>
-      <div class="op-titulo">RESPUESTA A ROBO DE BANCO</div>
-      <div class="op-desc">El Halcón recibe aviso de un robo en curso. Se despliega perímetro exterior, se corta el acceso a la zona y se espera a los delincuentes al salir. Si hay rehenes adentro, activan protocolo de negociación.</div>
-      <div class="op-tags"><span class="op-tag">Perímetro</span><span class="op-tag">Negociación</span><span class="op-tag">Toda la unidad</span></div>
-    </div>
+    <div class="op-card"><span class="op-emoji">🚐💰</span><div class="op-nivel">ALFA <span class="nb nb-a">ALTO RIESGO</span></div><div class="op-titulo">CONVOY BLINDADO</div><div class="op-desc">Transporte de armamento y efectivo por la ciudad. Formación vehicular, radio activa, detección de seguimientos. Los civiles pueden intentar el asalto.</div><div class="op-tags"><span class="op-tag">Formación vehicular</span><span class="op-tag">Radio activa</span><span class="op-tag">Toda la unidad</span></div></div>
+    <div class="op-card"><span class="op-emoji">🎙️🛡️</span><div class="op-nivel">BRAVO <span class="nb nb-a">ALTO RIESGO</span></div><div class="op-titulo">ESCOLTA VIP / STREAMER</div><div class="op-desc">Personalidad importante solicita protección. Escolta personal, perímetro y protocolo de evacuación. Fans o rivales pueden intentar acercarse.</div><div class="op-tags"><span class="op-tag">Escolta</span><span class="op-tag">Protocolo VIP</span><span class="op-tag">Comunicación</span></div></div>
+    <div class="op-card"><span class="op-emoji">🔴📌</span><div class="op-nivel">CHARLIE <span class="nb nb-m">MEDIO RIESGO</span></div><div class="op-titulo">CONTROL DE ZONA CALIENTE</div><div class="op-desc">Presencia permanente en zona conflictiva. Patrulla a pie, cacheos, control de identidad y registro de vehículos sospechosos.</div><div class="op-tags"><span class="op-tag">Patrulla a pie</span><span class="op-tag">Cacheos</span><span class="op-tag">Civil</span></div></div>
+    <div class="op-card"><span class="op-emoji">🏦🔒</span><div class="op-nivel">DELTA <span class="nb nb-a">ALTO RIESGO</span></div><div class="op-titulo">CUSTODIA BANCARIA</div><div class="op-desc">Escolta de traslado de fondos. Coordinación con el banco, anticipación de rutas. Si el traslado es atacado, activan protocolo de extracción.</div><div class="op-tags"><span class="op-tag">Ruta dinámica</span><span class="op-tag">Extracción</span><span class="op-tag">Coordinación</span></div></div>
+    <div class="op-card"><span class="op-emoji">🚗💨</span><div class="op-nivel">ECHO <span class="nb nb-a">ALTO RIESGO</span></div><div class="op-titulo">PERSECUCIÓN DE ALTO RIESGO</div><div class="op-desc">Un vehículo no detiene la marcha ante una orden policial. El Halcón coordina cierre de calles y ejecuta el corte sin causar daños civiles.</div><div class="op-tags"><span class="op-tag">Cierre de calles</span><span class="op-tag">Radio activa</span><span class="op-tag">Coordinación</span></div></div>
+    <div class="op-card"><span class="op-emoji">🆘</span><div class="op-nivel">FOXTROT <span class="nb nb-b">BAJA PELIGROSIDAD</span></div><div class="op-titulo">RESCATE DE REHÉN</div><div class="op-desc">Civil tomado de rehén. El Halcón negocia, establece perímetro y ejecuta extracción con mínimas bajas. Puede incluir negociador especializado.</div><div class="op-tags"><span class="op-tag">Negociación</span><span class="op-tag">Perímetro</span><span class="op-tag">Extracción</span></div></div>
+    <div class="op-card"><span class="op-emoji">🌆🚔</span><div class="op-nivel">GOLF <span class="nb nb-b">PRESENCIA DIARIA</span></div><div class="op-titulo">PATRULLA URBANA VISIBLE</div><div class="op-desc">Recorrido en formación por la ciudad, interacción con la comunidad, respuesta a llamados. Da visibilidad al Halcón y genera rol orgánico.</div><div class="op-tags"><span class="op-tag">Patrulla</span><span class="op-tag">Comunidad</span><span class="op-tag">Todo el grupo</span></div></div>
+    <div class="op-card"><span class="op-emoji">🏦🚨</span><div class="op-nivel">HOTEL <span class="nb nb-a">ALTO RIESGO</span></div><div class="op-titulo">RESPUESTA A ROBO DE BANCO</div><div class="op-desc">El Halcón recibe aviso de robo en curso. Perímetro exterior, corte de acceso y espera de los delincuentes al salir. Si hay rehenes, activan negociación.</div><div class="op-tags"><span class="op-tag">Perímetro</span><span class="op-tag">Negociación</span><span class="op-tag">Toda la unidad</span></div></div>
   </div>
 </section>
 
-<!-- ══════════ SELECCIÓN ══════════ -->
-<div class="sec-sep"><div class="sec-sep-line"></div><div class="sec-sep-icon">📋</div><div class="sec-sep-line"></div></div>
+<!-- SELECCIÓN -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">📋</div><div class="ssl"></div></div>
 <section class="seccion reveal" id="seleccion">
   <div class="sec-label">Proceso de ingreso — Fase 1</div>
   <div class="sec-titulo">FILTRO <span>ESCRITO</span></div>
-  <p class="sec-bajada">No es un examen de reglas. Son preguntas de criterio y mentalidad. No hay respuesta única correcta — se evalúa cómo piensan. Mínimo 24/40 para pasar a la Fase 2.</p>
-  <div class="sec-divider"></div>
-
-  <div class="situacion-card">
-    <div class="sit-num">SITUACIÓN 01</div>
-    <div class="sit-pregunta">Estás cubriendo un punto hace 40 minutos, no pasó nada. Tu compañero te dice por radio que abandones porque es al pedo. ¿Qué hacés?</div>
-    <div class="sit-respuesta-label">LO QUE BUSCÁS ESCUCHAR</div>
-    <div class="sit-respuesta">Que no abandone por presión de un par. Que diga algo como "me quedo hasta que un superior dé la orden de levantar el punto" o "informo al mando y espero confirmación". Que entienda que la disciplina existe aunque no pase nada.</div>
-    <div class="sit-alerta">Si dice que se va porque el compañero tenía razón, o que "si no pasa nada para qué quedarse" — ese es alguien que no aguanta el rol tranquilo y solo quiere acción.</div>
-  </div>
-
-  <div class="situacion-card">
-    <div class="sit-num">SITUACIÓN 02</div>
-    <div class="sit-pregunta">Un superior tuyo le está faltando el respeto a un civil sin motivo durante un rol. Vos estás al lado. ¿Cómo actuás?</div>
-    <div class="sit-respuesta-label">LO QUE BUSCÁS ESCUCHAR</div>
-    <div class="sit-respuesta">Que no se quede callado pero tampoco arme un escándalo en el momento. Algo como "en privado o por radio le digo que eso no está bien" o "después del operativo lo reporto al Director". Que entienda que hay jerarquía pero también límites.</div>
-    <div class="sit-alerta">Los dos extremos son malos. "Obedezco y me callo" = sin criterio. "Lo enfrento ahí mismo" = no entiende la cadena de mando.</div>
-  </div>
-
-  <div class="situacion-card">
-    <div class="sit-num">SITUACIÓN 03</div>
-    <div class="sit-pregunta">Estás solo en patrulla y ves algo sospechoso — un auto parado con personas adentro mirando un local. No hay nadie disponible por radio. ¿Qué hacés paso a paso?</div>
-    <div class="sit-respuesta-label">LO QUE BUSCÁS ESCUCHAR</div>
-    <div class="sit-respuesta">Que no actúe solo ni ignore la situación. Algo como "me posiciono a distancia, sigo observando, insisto por radio, anoto descripción del vehículo y espero refuerzos antes de acercarme". Que entienda que actuar solo sin apoyo es un riesgo.</div>
-    <div class="sit-alerta">"Me acerco solo a investigar" o "los enfrento" = impulsivo. "No hago nada porque no hay apoyo" = pasividad total. Ambas son señales de alerta.</div>
-  </div>
-
-  <div style="margin-top:1.5rem;">
-    <div class="examen-bloque">
-      <div class="examen-bloque-titulo">Preguntas adicionales de criterio</div>
-      <div class="pregunta"><span class="pregunta-n">4</span><span class="pregunta-texto">¿Por qué querés ser parte del Grupo Halcón? <em style="color:var(--gris);font-size:0.82rem;">(Se evalúa: sustancia real, no "quiero acción")</em></span></div>
-      <div class="pregunta"><span class="pregunta-n">5</span><span class="pregunta-texto">Describí en 3 líneas a tu personaje: quién es, de dónde viene y por qué entró a la PFA. <em style="color:var(--gris);font-size:0.82rem;">(Se evalúa: personaje construido, no un skin genérico)</em></span></div>
-    </div>
-  </div>
+  <p class="sec-bajada">Preguntas de criterio y mentalidad — no de reglas. Mínimo 24/40 para pasar a Fase 2.</p>
+  <div class="sec-div"></div>
+  <div class="sit-card"><div class="sit-num">SITUACIÓN 01</div><div class="sit-q">Estás cubriendo un punto hace 40 minutos, no pasó nada. Tu compañero te dice por radio que abandones porque es al pedo. ¿Qué hacés?</div><div class="sit-rl">LO QUE BUSCÁS ESCUCHAR</div><div class="sit-r">Que no abandone por presión de un par. Que espere orden del mando o informe antes de moverse. Disciplina existe aunque no pase nada.</div><div class="sit-al">Si se va porque el compañero lo convenció = solo quiere acción, no sirve para el Halcón.</div></div>
+  <div class="sit-card"><div class="sit-num">SITUACIÓN 02</div><div class="sit-q">Un superior tuyo le está faltando el respeto a un civil sin motivo durante un rol. Vos estás al lado. ¿Cómo actuás?</div><div class="sit-rl">LO QUE BUSCÁS ESCUCHAR</div><div class="sit-r">Que no se calle pero tampoco arme drama en el momento. Canal correcto: privado, radio o reporte posterior al Director.</div><div class="sit-al">Callarse = sin criterio. Enfrentarlo en el momento = no entiende la cadena de mando.</div></div>
+  <div class="sit-card"><div class="sit-num">SITUACIÓN 03</div><div class="sit-q">Estás solo en patrulla y ves un auto sospechoso mirando un local. Sin nadie disponible por radio. ¿Qué hacés paso a paso?</div><div class="sit-rl">LO QUE BUSCÁS ESCUCHAR</div><div class="sit-r">Observar a distancia, insistir por radio, anotar descripción del vehículo y esperar refuerzos antes de acercarse. No actuar solo.</div><div class="sit-al">"Me acerco solo" = impulsivo. "No hago nada" = pasivo. Ambos son señal de alerta.</div></div>
+  <div style="margin-top:1.5rem;"><div class="ex-bloque"><div class="ex-titulo">Preguntas adicionales de criterio</div><div class="pregunta"><span class="pn">4</span><span>¿Por qué querés ser parte del Grupo Halcón? <em style="color:var(--gris);font-size:.85rem;">(Se evalúa sustancia real)</em></span></div><div class="pregunta"><span class="pn">5</span><span>Describí en 3 líneas a tu personaje: quién es, de dónde viene y por qué entró a la PFA.</span></div></div></div>
 </section>
 
-<!-- ══════════ EVALUACIÓN / ROL EN VIVO ══════════ -->
-<div class="sec-sep"><div class="sec-sep-line"></div><div class="sec-sep-icon">🎭</div><div class="sec-sep-line"></div></div>
+<!-- EVALUACIÓN -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">🎭</div><div class="ssl"></div></div>
 <section class="seccion reveal" id="evaluacion">
   <div class="sec-label">Proceso de ingreso — Fase 2 · USO INTERNO</div>
   <div class="sec-titulo">ROL EN <span>VIVO</span></div>
-  <p class="sec-bajada">El postulante no sabe qué escenarios van a ocurrir. Los actores coordinan por privado antes de la prueba. Duración: 20 a 30 minutos.</p>
-  <div class="sec-divider"></div>
-
-  <div class="escenarios-grid">
-    <div class="escenario-card">
-      <div class="esc-letra">A</div>
-      <div class="esc-nombre">El primer día en patrulla</div>
-      <div class="esc-desc">El evaluador lleva al postulante a patrullar normalmente. En algún momento, un integrante del Halcón (de civil) actúa sospechoso. No se le dice nada al postulante.</div>
-      <div class="esc-eval"><strong>Evaluar:</strong> ¿Reacciona? ¿Cómo se comunica? ¿Pide apoyo o actúa solo?</div>
-    </div>
-    <div class="escenario-card">
-      <div class="esc-letra">B</div>
-      <div class="esc-nombre">La orden incómoda</div>
-      <div class="esc-desc">En medio del rol, el evaluador da una orden que parece incorrecta o exagerada. Por ejemplo: detener a un civil sin motivo aparente.</div>
-      <div class="esc-eval"><strong>Evaluar:</strong> ¿La cuestiona con respeto o obedece sin criterio? ¿Maneja bien el desacuerdo?</div>
-    </div>
-    <div class="escenario-card">
-      <div class="esc-letra">C</div>
-      <div class="esc-nombre">El compañero problema</div>
-      <div class="esc-desc">Otro integrante del Halcón interpreta a un agente que rompe el rol, insulta o actúa de forma irregular. El postulante no sabe que es una prueba.</div>
-      <div class="esc-eval"><strong>Evaluar:</strong> ¿Cómo lo maneja? ¿Busca el canal correcto o lo enfrenta en el momento?</div>
-    </div>
-    <div class="escenario-card">
-      <div class="esc-letra">D</div>
-      <div class="esc-nombre">Crisis en vivo</div>
-      <div class="esc-desc">Situación espontánea: un rehén, una persecución, un civil agresivo. El postulante actúa solo por 2–3 minutos antes de que llegue apoyo.</div>
-      <div class="esc-eval"><strong>Evaluar:</strong> Improvisación, uso del radio, criterio y calma bajo presión.</div>
-    </div>
+  <p class="sec-bajada">El postulante no sabe qué escenarios van a ocurrir. Los actores coordinan por privado antes. 20 a 30 minutos.</p>
+  <div class="sec-div"></div>
+  <div class="esc-grid">
+    <div class="esc-card"><div class="esc-letra">A</div><div class="esc-nombre">El primer día en patrulla</div><div class="esc-desc">El evaluador lleva al postulante a patrullar. Un integrante del Halcón de civil actúa sospechoso sin aviso previo.</div><div class="esc-eval"><strong>Evaluar:</strong> ¿Reacciona? ¿Pide apoyo o actúa solo?</div></div>
+    <div class="esc-card"><div class="esc-letra">B</div><div class="esc-nombre">La orden incómoda</div><div class="esc-desc">El evaluador da una orden que parece incorrecta. Ejemplo: detener a un civil sin motivo aparente.</div><div class="esc-eval"><strong>Evaluar:</strong> ¿La cuestiona con respeto o obedece sin criterio?</div></div>
+    <div class="esc-card"><div class="esc-letra">C</div><div class="esc-nombre">El compañero problema</div><div class="esc-desc">Un integrante del Halcón interpreta a un agente que rompe el rol o actúa de forma irregular. Sin aviso.</div><div class="esc-eval"><strong>Evaluar:</strong> ¿Busca el canal correcto o lo enfrenta en el momento?</div></div>
+    <div class="esc-card"><div class="esc-letra">D</div><div class="esc-nombre">Crisis en vivo</div><div class="esc-desc">Situación espontánea: rehén, persecución o civil agresivo. El postulante actúa solo 2–3 minutos antes del apoyo.</div><div class="esc-eval"><strong>Evaluar:</strong> Improvisación, radio, criterio y calma bajo presión.</div></div>
   </div>
 
-  <!-- TABLA PUNTAJE -->
   <div style="margin-top:2.5rem;">
     <div class="sec-label">Guía de puntaje — Capitanes</div>
     <div class="sec-titulo" style="font-size:clamp(1.5rem,4vw,2.5rem);margin-bottom:1.5rem;">TABLA DE <span>EVALUACIÓN</span></div>
-
-    <p style="font-size:0.85rem;color:var(--gris);margin-bottom:1rem;font-weight:300;">Fase 1 — Escrito (máx. 40 pts)</p>
-    <table class="tabla-puntaje" style="margin-bottom:2rem;">
-      <thead>
-        <tr><th>Criterio</th><th>Descripción</th><th>Puntaje</th></tr>
-      </thead>
+    <p style="font-size:.9rem;color:var(--gris);margin-bottom:1rem;font-weight:300;">Fase 1 — Escrito (máx. 40 pts)</p>
+    <table class="tabla" style="margin-bottom:2rem;">
+      <thead><tr><th>Criterio</th><th>Descripción</th><th>Pts</th></tr></thead>
       <tbody>
-        <tr><td>Situación 1</td><td>Disciplina bajo presión — no cede a la presión del par</td><td class="puntaje">/10</td></tr>
-        <tr><td>Situación 2</td><td>Criterio vs jerarquía — equilibrio correcto</td><td class="puntaje">/10</td></tr>
-        <tr><td>Situación 3</td><td>Protocolo sin apoyo — observa, reporta, no actúa solo</td><td class="puntaje">/10</td></tr>
-        <tr><td>Motivación</td><td>Respuesta con sustancia real</td><td class="puntaje">/5</td></tr>
-        <tr><td>Personaje IC</td><td>Tiene nombre, historia y coherencia con ser PFA</td><td class="puntaje">/5</td></tr>
+        <tr><td>Situación 1</td><td>Disciplina bajo presión</td><td class="pt">/10</td></tr>
+        <tr><td>Situación 2</td><td>Criterio vs jerarquía</td><td class="pt">/10</td></tr>
+        <tr><td>Situación 3</td><td>Protocolo sin apoyo</td><td class="pt">/10</td></tr>
+        <tr><td>Motivación</td><td>Respuesta con sustancia real</td><td class="pt">/5</td></tr>
+        <tr><td>Personaje IC</td><td>Historia y coherencia</td><td class="pt">/5</td></tr>
       </tbody>
     </table>
-
-    <p style="font-size:0.85rem;color:var(--gris);margin-bottom:1rem;font-weight:300;">Fase 2 — Rol en vivo (máx. 50 pts)</p>
-    <table class="tabla-puntaje" style="margin-bottom:2rem;">
-      <thead>
-        <tr><th>Criterio</th><th>Descripción</th><th>Puntaje</th></tr>
-      </thead>
+    <p style="font-size:.9rem;color:var(--gris);margin-bottom:1rem;font-weight:300;">Fase 2 — Rol en vivo (máx. 50 pts)</p>
+    <table class="tabla" style="margin-bottom:2rem;">
+      <thead><tr><th>Criterio</th><th>Descripción</th><th>Pts</th></tr></thead>
       <tbody>
-        <tr><td>Personaje</td><td>Habla, gestos, coherencia IC durante el rol</td><td class="puntaje">/10</td></tr>
-        <tr><td>Radio</td><td>Usa el radio, da info útil, no grita ni lo ignora</td><td class="puntaje">/10</td></tr>
-        <tr><td>Improvisación</td><td>No se congela, actúa dentro del rol ante lo inesperado</td><td class="puntaje">/10</td></tr>
-        <tr><td>Cadena de mando</td><td>Pide autorización, no actúa solo sin criterio</td><td class="puntaje">/10</td></tr>
-        <tr><td>Genera rol</td><td>No solo reacciona — también construye la escena</td><td class="puntaje">/10</td></tr>
+        <tr><td>Personaje</td><td>Habla, gestos, coherencia IC</td><td class="pt">/10</td></tr>
+        <tr><td>Radio</td><td>Usa el radio, da info útil</td><td class="pt">/10</td></tr>
+        <tr><td>Improvisación</td><td>No se congela ante lo inesperado</td><td class="pt">/10</td></tr>
+        <tr><td>Cadena de mando</td><td>Pide autorización, no actúa solo</td><td class="pt">/10</td></tr>
+        <tr><td>Genera rol</td><td>No solo reacciona, construye la escena</td><td class="pt">/10</td></tr>
       </tbody>
     </table>
-
-    <p style="font-size:0.85rem;color:var(--gris);margin-bottom:1rem;font-weight:300;">Tabla de resultados</p>
-    <div class="resultados-grid">
-      <div class="resultado-card" style="border-top:2px solid #60a060;">
-        <div class="resultado-icono">✅</div>
-        <div class="resultado-titulo" style="color:#60a060;">APROBADO</div>
-        <div class="resultado-condicion">Fase 1 ≥ 24/40<br>y Fase 2 ≥ 30/50<br><br>Ingresa como Agente Halcón</div>
-      </div>
-      <div class="resultado-card" style="border-top:2px solid var(--dorado);">
-        <div class="resultado-icono">⏳</div>
-        <div class="resultado-titulo" style="color:var(--dorado);">CONDICIONAL</div>
-        <div class="resultado-condicion">Fase 1 aprobada<br>Fase 2 entre 20 y 29<br><br>Cadete 2 semanas más · Repite solo Fase 2</div>
-      </div>
-      <div class="resultado-card" style="border-top:2px solid var(--rojo);">
-        <div class="resultado-icono">❌</div>
-        <div class="resultado-titulo" style="color:var(--rojo);">NO APROBADO</div>
-        <div class="resultado-condicion">Fase 1 &lt; 24<br>o Fase 2 &lt; 20<br><br>Puede reintentar en 2 semanas</div>
-      </div>
+    <div class="res-grid">
+      <div class="res-card" style="border-top:2px solid #60a060;"><div class="res-icono">✅</div><div class="res-titulo" style="color:#60a060;">APROBADO</div><div class="res-cond">Fase 1 ≥ 24/40 y Fase 2 ≥ 30/50<br>Ingresa como Teniente Halcón</div></div>
+      <div class="res-card" style="border-top:2px solid var(--dorado);"><div class="res-icono">⏳</div><div class="res-titulo" style="color:var(--dorado);">CONDICIONAL</div><div class="res-cond">Fase 1 ok · Fase 2 entre 20 y 29<br>Miembro 2 semanas más · Repite Fase 2</div></div>
+      <div class="res-card" style="border-top:2px solid var(--rojo);"><div class="res-icono">❌</div><div class="res-titulo" style="color:var(--rojo);">NO APROBADO</div><div class="res-cond">Fase 1 &lt; 24 o Fase 2 &lt; 20<br>Puede reintentar en 2 semanas</div></div>
     </div>
   </div>
-
-  <!-- NOTAS EVALUADOR -->
-  <div class="nota-evaluador">
+  <div class="nota-ev">
     <div class="nota-titulo">📋 NOTAS PARA EL EVALUADOR</div>
-    <div class="nota-item"><span class="nota-arrow">→</span>Antes del rol: no des pistas. Solo decile que van a patrullar. Los actores ya coordinaron por privado.</div>
-    <div class="nota-item"><span class="nota-arrow">→</span>Durante: tomá nota en tiempo real. No corrijas ni guíes al postulante. Los errores son información valiosa.</div>
-    <div class="nota-item"><span class="nota-arrow">→</span>Después: preguntale cómo cree que le fue y qué cambiaría. Quien se autoevalúa bien, va a crecer.</div>
-    <div class="nota-item"><span class="nota-arrow">→</span><strong style="color:var(--blanco)">Veto del evaluador:</strong> si el postulante rompe el personaje con agresividad, falta el respeto o actúa de mala fe, el Capitán puede emitir NO APROBADO directo, sin importar el puntaje. Se documenta y se reporta al Director.</div>
-    <div class="nota-item"><span class="nota-arrow">→</span>Sin segunda condicional: si repite Fase 2 y vuelve a quedar entre 20 y 29, queda afuera definitivamente.</div>
+    <div class="nota-item"><span class="nota-arr">→</span>Antes del rol: no des pistas. Solo decile que van a patrullar.</div>
+    <div class="nota-item"><span class="nota-arr">→</span>Durante: tomá nota en tiempo real. No corrijas ni guíes al postulante.</div>
+    <div class="nota-item"><span class="nota-arr">→</span>Después: preguntale cómo cree que le fue y qué cambiaría.</div>
+    <div class="nota-item"><span class="nota-arr">→</span><strong style="color:var(--blanco)">Veto:</strong> agresividad, falta de respeto o mala fe = NO APROBADO directo. Reportar al Director.</div>
+    <div class="nota-item"><span class="nota-arr">→</span>Sin segunda condicional: segunda Fase 2 entre 20 y 29 = afuera definitivamente.</div>
   </div>
 </section>
 
-<!-- ══════════ DISCORD ══════════ -->
-<div class="sec-sep"><div class="sec-sep-line"></div><div class="sec-sep-icon">💬</div><div class="sec-sep-line"></div></div>
+<!-- EXAMEN CON DISCORD -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">📝</div><div class="ssl"></div></div>
+<section class="seccion reveal" id="examen">
+  <div class="sec-label">Formulario de postulación</div>
+  <div class="sec-titulo">EXAMEN DE <span>INGRESO</span></div>
+  <p class="sec-bajada">Completá todas las preguntas. Al enviar, llega directo al log del Discord del Grupo Halcón.</p>
+  <div class="sec-div"></div>
+  <div class="form-wrap" id="formIngreso">
+    <div class="fg">
+      <div class="fg-titulo">Datos del postulante</div>
+      <div class="fi"><label class="fl"><span>1</span>Nombre IC en el server</label><input class="finput" id="q_nombre" type="text" placeholder="Tu nombre de personaje..."></div>
+
+      <div class="fi"><label class="fl"><span>2</span>Rango actual en la PFA</label>
+        <select class="fselect" id="q_rango">
+          <option value="">Seleccioná tu rango...</option>
+          <option>Sargento</option>
+          <option>Sargento 1°</option>
+          <option>Teniente</option>
+          <option>Teniente 1°</option>
+          <option>Sub-oficial</option>
+          <option>Sub-oficial Mayor</option>
+          <option>Oficial</option>
+          <option>Sub-inspector</option>
+          <option>Inspector</option>
+          <option>Inspector Principal</option>
+          <option>Sub-coronel</option>
+          <option>Coronel</option>
+          <option>Sub-comisario</option>
+          <option>Comisario</option>
+          <option>Comisario Inspector</option>
+          <option>Comisario Mayor</option>
+          <option>Comisario General</option>
+        </select>
+      </div>
+      <div class="fi"><label class="fl"><span>3</span>¿Tenés micrófono?</label><div class="radio-g"><label class="radio-l"><input type="radio" name="mic" value="Sí"><span>Sí</span></label><label class="radio-l"><input type="radio" name="mic" value="No"><span>No</span></label></div></div>
+      <div class="fi"><label class="fl"><span>4</span>Días disponibles por semana</label><div class="radio-g"><label class="radio-l"><input type="radio" name="dias" value="1-2 días"><span>1–2 días</span></label><label class="radio-l"><input type="radio" name="dias" value="3-4 días"><span>3–4 días</span></label><label class="radio-l"><input type="radio" name="dias" value="5+ días"><span>5+ días</span></label></div></div>
+    </div>
+    <div class="fg">
+      <div class="fg-titulo">Conocimiento y protocolo</div>
+      <div class="fi">
+        <label class="fl"><span>5</span>Completá las cantidades permitidas por robo</label>
+        <p style="font-size:.85rem;color:var(--gris);margin-bottom:1rem;font-weight:300;">Seleccioná cada robo e ingresá las cantidades. Se valida en el momento.</p>
+        <div id="latasContainer" style="display:flex;flex-direction:column;gap:.6rem;"></div>
+        <div id="latasResumen" style="margin-top:1rem;font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.15em;color:var(--gris-clr);"></div>
+      </div>
+
+      <div class="fi"><label class="fl"><span>6</span>¿Qué hacés si el sospechoso intenta fugarse en vehículo durante un operativo?</label><textarea class="ftextarea" id="q_fuga" placeholder="Describí el protocolo..."></textarea></div>
+      <div class="fi"><label class="fl"><span>7</span>¿Cuándo está permitido disparar primero sin provocación previa?</label><textarea class="ftextarea" id="q_disparo" placeholder="Según el reglamento del server..."></textarea></div>
+      <div class="fi"><label class="fl"><span>8</span>¿Qué es el NVL (No Valorar la Vida) y poné un ejemplo?</label><textarea class="ftextarea" id="q_nvl" placeholder="Definición y ejemplo..."></textarea></div>
+    </div>
+    <div class="fg">
+      <div class="fg-titulo">Criterio y mentalidad</div>
+      <div class="fi"><label class="fl"><span>9</span>Estás cubriendo un punto hace 40 minutos sin novedades. Tu compañero te dice que te vayas. ¿Qué hacés?</label><textarea class="ftextarea" id="q_sit1" placeholder="Respondé con honestidad..."></textarea></div>
+      <div class="fi"><label class="fl"><span>10</span>Un superior falta el respeto a un civil sin motivo durante un rol. Vos estás al lado. ¿Cómo actuás?</label><textarea class="ftextarea" id="q_sit2" placeholder="Respondé con honestidad..."></textarea></div>
+      <div class="fi"><label class="fl"><span>11</span>Estás solo en patrulla y ves un auto sospechoso mirando un local. Sin apoyo disponible. ¿Qué hacés paso a paso?</label><textarea class="ftextarea" id="q_sit3" placeholder="Detallá cada paso..."></textarea></div>
+    </div>
+    <div class="fg">
+      <div class="fg-titulo">Motivación y personaje</div>
+      <div class="fi"><label class="fl"><span>12</span>¿Por qué querés ser parte del Grupo Halcón?</label><textarea class="ftextarea" id="q_motivacion" placeholder="Sé honesto y específico..."></textarea></div>
+      <div class="fi"><label class="fl"><span>13</span>Describí a tu personaje: quién es, de dónde viene y por qué entró a la PFA (mínimo 3 líneas)</label><textarea class="ftextarea" id="q_personaje" style="min-height:100px;" placeholder="Historia de tu personaje..."></textarea></div>
+    </div>
+    <button class="btn-env" id="btnEnviar" onclick="enviarExamen()">ENVIAR AL DISCORD 🦅</button>
+    <div class="fstatus" id="statusExamen"></div>
+  </div>
+</section>
+
+<!-- POSICIONAMIENTO -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">🚗</div><div class="ssl"></div></div>
+<section class="seccion reveal" id="posicionamiento">
+  <div class="sec-label">Herramienta táctica</div>
+  <div class="sec-titulo">POSICIONAMIENTO DE <span>VEHÍCULOS</span></div>
+  <p class="sec-bajada">Seleccioná el robo, elegí el tipo de vehículo y hacé click en el mapa para posicionarlo. Luego enviá la disposición al Discord.</p>
+  <div class="sec-div"></div>
+  <div class="mapa-btns" id="mapaBtns"></div>
+  <div class="mapa-ctrls" style="margin-bottom:1rem;">
+    <span style="font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.2em;color:var(--dorado)">TIPO:</span>
+    <button class="mc-btn" id="bt-patrullero" onclick="setTipo('patrullero')" style="border-color:rgba(0,120,255,.4);color:#4090ff">🚔 Patrullero</button>
+    <button class="mc-btn" id="bt-furgon" onclick="setTipo('furgon')" style="border-color:rgba(200,168,75,.4);color:var(--dorado)">🚐 Furgón</button>
+    <button class="mc-btn" id="bt-moto" onclick="setTipo('moto')" style="border-color:rgba(80,160,80,.4);color:#60c060">🏍️ Moto</button>
+    <button class="mc-btn" id="bt-sniper" onclick="setTipo('sniper')" style="border-color:rgba(204,40,40,.4);color:var(--rojo)">🎯 Sniper</button>
+  </div>
+  <div class="mapa-cont" id="mapaCont"><canvas class="mapa-canvas" id="mapaCanvas"></canvas></div>
+  <div class="mapa-ctrls">
+    <button class="mc-btn" onclick="rotarSeleccionado(-45)" style="border-color:rgba(200,168,75,.3);color:var(--dorado)">↺ -45°</button>
+    <button class="mc-btn" onclick="rotarSeleccionado(45)" style="border-color:rgba(200,168,75,.3);color:var(--dorado)">↻ +45°</button>
+    <button class="mc-btn" onclick="deshacerUltimo()">↩ Deshacer</button>
+    <button class="mc-btn danger" onclick="limpiarMapa()">🗑 Limpiar</button>
+    <button class="mc-btn" onclick="enviarMapa()" style="border-color:var(--dorado);color:var(--dorado)">📤 Enviar al Discord</button>
+  </div>
+  <div class="leyenda">
+    <div class="ley-i"><div class="ley-dot" style="background:#3070dd"></div>Patrullero</div>
+    <div class="ley-i"><div class="ley-dot" style="background:#bb8800"></div>Furgón</div>
+    <div class="ley-i"><div class="ley-dot" style="background:#30a050"></div>Moto</div>
+    <div class="ley-i"><div class="ley-dot" style="background:#882020"></div>Sniper</div>
+    <div class="ley-i"><div class="ley-dot" style="background:#cc2828"></div>Puerta (P)</div>
+  </div>
+  <p class="mapa-nota">Click para colocar · Click en un vehículo para seleccionarlo (se marca en amarillo) · Rotá con los botones ↺ ↻ o las flechas del teclado · Click derecho rota 45°</p>
+  <div style="margin-top:1rem;"><input class="finput" id="notaMapa" type="text" placeholder="Nota táctica (opcional): Ej: Furgón cubre esquina norte..."></div>
+  <div class="fstatus" id="statusMapa"></div>
+</section>
+
+<!-- DISCORD -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">💬</div><div class="ssl"></div></div>
 <section class="seccion reveal" id="discord">
   <div class="sec-label">Organización interna</div>
   <div class="sec-titulo">ESTRUCTURA <span>DISCORD</span></div>
-  <p class="sec-bajada">Canales sugeridos para mantener el servidor organizado y profesional.</p>
-  <div class="sec-divider"></div>
-  <div class="discord-grid">
-    <div class="discord-cat">
-      <div class="discord-cat-title">📢 Información Oficial</div>
-      <div class="discord-canal especial"><span class="discord-canal-prefix">#</span>anuncios-halcon</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>reglamento</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>sistema-de-rangos</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>pagas-y-beneficios</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>calendario-operativos</div>
-    </div>
-    <div class="discord-cat">
-      <div class="discord-cat-title">📥 Ingreso</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>presentaciones</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>solicitud-de-ingreso</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>estado-de-postulaciones</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>examen-escrito-entrega</div>
-    </div>
-    <div class="discord-cat">
-      <div class="discord-cat-title">🦅 Operaciones</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>briefing-semanal</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>asignacion-de-roles</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>informes-de-operativo</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>galeria-de-capturas</div>
-    </div>
-    <div class="discord-cat">
-      <div class="discord-cat-title">💬 Comunicación</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>general-agentes</div>
-      <div class="discord-canal especial"><span class="discord-canal-prefix">#</span>zona-de-mando</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>sugerencias</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>sanciones-y-ascensos</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>off-topic</div>
-    </div>
-    <div class="discord-cat">
-      <div class="discord-cat-title">🏆 Reconocimientos</div>
-      <div class="discord-canal especial"><span class="discord-canal-prefix">#</span>agente-del-mes</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>hall-of-fame</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>operativos-destacados</div>
-      <div class="discord-canal"><span class="discord-canal-prefix">#</span>bajas-y-retiros</div>
-    </div>
-    <div class="discord-cat">
-      <div class="discord-cat-title">🔊 Canales de Voz</div>
-      <div class="discord-canal especial">🔊 Reunión de Mando</div>
-      <div class="discord-canal">🔊 Operativo en Curso</div>
-      <div class="discord-canal">🔊 Entrenamiento</div>
-      <div class="discord-canal">🔊 Sala de Espera</div>
-      <div class="discord-canal">🔊 Off — Relax</div>
-    </div>
+  <div class="sec-div"></div>
+  <div class="dc-grid">
+    <div class="dc-cat"><div class="dc-cat-t">📢 Información Oficial</div><div class="dc-canal esp"><span class="dc-pre">#</span>anuncios-halcon</div><div class="dc-canal"><span class="dc-pre">#</span>reglamento</div><div class="dc-canal"><span class="dc-pre">#</span>jerarquia-halcon</div><div class="dc-canal"><span class="dc-pre">#</span>calendario-operativos</div></div>
+    <div class="dc-cat"><div class="dc-cat-t">📥 Ingreso</div><div class="dc-canal"><span class="dc-pre">#</span>presentaciones</div><div class="dc-canal"><span class="dc-pre">#</span>solicitud-de-ingreso</div><div class="dc-canal"><span class="dc-pre">#</span>estado-de-postulaciones</div><div class="dc-canal esp"><span class="dc-pre">#</span>log-examenes</div></div>
+    <div class="dc-cat"><div class="dc-cat-t">🦅 Operaciones</div><div class="dc-canal"><span class="dc-pre">#</span>briefing-semanal</div><div class="dc-canal"><span class="dc-pre">#</span>asignacion-de-roles</div><div class="dc-canal esp"><span class="dc-pre">#</span>log-posicionamiento</div><div class="dc-canal"><span class="dc-pre">#</span>galeria-de-capturas</div></div>
+    <div class="dc-cat"><div class="dc-cat-t">💬 Comunicación</div><div class="dc-canal"><span class="dc-pre">#</span>general-agentes</div><div class="dc-canal esp"><span class="dc-pre">#</span>zona-de-mando</div><div class="dc-canal"><span class="dc-pre">#</span>sugerencias</div><div class="dc-canal"><span class="dc-pre">#</span>sanciones-y-ascensos</div></div>
+    <div class="dc-cat"><div class="dc-cat-t">🏆 Reconocimientos</div><div class="dc-canal esp"><span class="dc-pre">#</span>agente-del-mes</div><div class="dc-canal"><span class="dc-pre">#</span>hall-of-fame</div><div class="dc-canal"><span class="dc-pre">#</span>operativos-destacados</div><div class="dc-canal"><span class="dc-pre">#</span>bajas-y-retiros</div></div>
+    <div class="dc-cat"><div class="dc-cat-t">🔊 Canales de Voz</div><div class="dc-canal esp">🔊 Reunión de Mando</div><div class="dc-canal">🔊 Operativo en Curso</div><div class="dc-canal">🔊 Entrenamiento</div><div class="dc-canal">🔊 Sala de Espera</div><div class="dc-canal">🔊 Off — Relax</div></div>
   </div>
 </section>
 
-<!-- ══════════ PRESENTACIÓN ══════════ -->
-<div class="sec-sep"><div class="sec-sep-line"></div><div class="sec-sep-icon">📣</div><div class="sec-sep-line"></div></div>
+<!-- PRESENTACIÓN -->
+<div class="sec-sep"><div class="ssl"></div><div class="ssi">📣</div><div class="ssl"></div></div>
 <section class="seccion reveal" id="presentacion">
   <div class="sec-label">Apertura de inscripciones</div>
   <div class="sec-titulo">TEXTO DE <span>PRESENTACIÓN</span></div>
-  <p class="sec-bajada">Listo para pegar en Discord. Copiá y pegá en el canal #anuncios-halcon.</p>
-  <div class="sec-divider"></div>
-
-  <div class="presentacion-box">
-    <div class="presentacion-linea titulo">🦅 GRUPO HALCÓN — ABRE INSCRIPCIONES 🦅</div>
-    <div class="presentacion-linea" style="color:var(--gris);font-size:0.82rem;">Subdivisión Táctica PFA · KilomboRP</div>
-    <div class="presentacion-linea sep" style="margin:0.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
-    <div class="presentacion-linea">¿Buscás un grupo con estructura real y rol de calidad?</div>
-    <div class="presentacion-linea" style="color:var(--blanco);font-weight:700;margin-top:0.3rem;">El Halcón es lo tuyo.</div>
-    <div class="presentacion-linea sep" style="margin:0.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
-    <div class="presentacion-linea seccion">📌 REQUISITOS</div>
-    <div class="presentacion-linea">▸ Ser miembro activo de KilomboRP</div>
-    <div class="presentacion-linea">▸ Micrófono funcional</div>
-    <div class="presentacion-linea">▸ Mínimo 3 días activo por semana</div>
-    <div class="presentacion-linea">▸ Respetar la cadena de mando</div>
-    <div class="presentacion-linea sep" style="margin:0.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
-    <div class="presentacion-linea seccion">📋 CÓMO INGRESÁS</div>
-    <div class="presentacion-linea">▸ Completá el form en #solicitud-de-ingreso</div>
-    <div class="presentacion-linea">▸ Semana de prueba como Cadete</div>
-    <div class="presentacion-linea">▸ Examen escrito de criterio</div>
-    <div class="presentacion-linea">▸ Examen oral en vivo con el equipo</div>
-    <div class="presentacion-linea">▸ Bienvenido, Agente.</div>
-    <div class="presentacion-linea sep" style="margin:0.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
-    <div class="presentacion-linea final">«Donde el Halcón vuela, la Ley prevalece»</div>
+  <p class="sec-bajada">Listo para pegar en Discord.</p>
+  <div class="sec-div"></div>
+  <div class="pres-box">
+    <div class="pl titulo">🦅 GRUPO HALCÓN — ABRE INSCRIPCIONES 🦅</div>
+    <div class="pl" style="color:var(--gris);font-size:.85rem;">Subdivisión Táctica PFA · KilomboRP</div>
+    <div class="pl sep" style="margin:.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
+    <div class="pl">¿Buscás un grupo con estructura real y rol de calidad?</div>
+    <div class="pl" style="color:var(--blanco);font-weight:700;margin-top:.3rem;">El Halcón es lo tuyo.</div>
+    <div class="pl sep" style="margin:.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
+    <div class="pl sec">📌 REQUISITOS</div>
+    <div class="pl">▸ Ser miembro activo de KilomboRP</div>
+    <div class="pl">▸ Rango mínimo Sargento en la PFA</div>
+    <div class="pl">▸ Micrófono funcional</div>
+    <div class="pl">▸ Mínimo 3 días activo por semana</div>
+    <div class="pl">▸ Respetar la cadena de mando</div>
+    <div class="pl sep" style="margin:.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
+    <div class="pl sec">📋 CÓMO INGRESÁS</div>
+    <div class="pl">▸ Completá el form en #solicitud-de-ingreso</div>
+    <div class="pl">▸ Semana de prueba como Miembro Halcón</div>
+    <div class="pl">▸ Examen escrito de criterio</div>
+    <div class="pl">▸ Examen oral en vivo con el equipo</div>
+    <div class="pl">▸ Bienvenido, Agente.</div>
+    <div class="pl sep" style="margin:.8rem 0;">━━━━━━━━━━━━━━━━━━━━━━━━</div>
+    <div class="pl final">«Donde el Halcón vuela, la Ley prevalece»</div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  🦅 &nbsp;<span>GRUPO HALCÓN</span>&nbsp; ·&nbsp; PFA · <span>KILOMBORP</span>&nbsp; ·&nbsp; DISCIPLINA · LEALTAD · PRECISIÓN
-</footer>
+<footer>🦅 &nbsp;<span>GRUPO HALCÓN</span>&nbsp; ·&nbsp; PFA · <span>KILOMBORP</span>&nbsp; ·&nbsp; DISCIPLINA · LEALTAD · PRECISIÓN</footer>
 
 <script>
-const observer = new IntersectionObserver(entries => {
+const WEBHOOK='https://discord.com/api/webhooks/1493416335684931625/IdkCYUutKflxpWOOpqh7FHS5uCVeUMp57CGHl58qoihF5fsF3pUnaAV7nCqJeggW1obJ';
+
+// SCROLL REVEAL
+const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
+    if(e.isIntersecting) {
       e.target.classList.add('visible');
-      observer.unobserve(e.target);
+      // Si es la sección del mapa, forzar resize
+      if(e.target.id==='posicionamiento') setTimeout(()=>{resize();initBtns();},50);
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ENVIAR EXAMEN
+// SISTEMA DE LATAS — un robo a la vez
+const _ld=(s)=>s.split(',').map(x=>x.split(':').map(Number));
+const _lr=_ld('0:0:0,1:3:1,2:3:1,1:2:1,3:6:2,4:6:3,4:6:3,2:2:1,2:3:1,2:4:1,3:4:2,4:8:3,2:3:3,4:3:2,8:6:6');
+const latasNombres=['Gasolinera / Tienda','Bancos Fleeca','Facebook','Casa Michael','Banco Central','Maze Bank','Humane','Joyería (Express)','Estadio','Subte','Rancho Abandonado','Carnicería','Yate','Museo','Fábrica'];
+const latasData=latasNombres.map((n,i)=>({nombre:n,humos:_lr[i][0],latas:_lr[i][1],molotovs:_lr[i][2]}));
+
+let latasIdx=0;
+let latasRespuestas=[];
+
+function initLatas(){
+  latasIdx=0;
+  latasRespuestas=[];
+  renderLatas();
+}
+
+function renderLatas(){
+  const cont=document.getElementById('latasContainer');
+  const res=document.getElementById('latasResumen');
+  if(!cont)return;
+
+  if(latasIdx>=latasData.length){
+    // Mostrar resultado final
+    const ok=latasRespuestas.filter(r=>r.ok).length;
+    const total=latasData.length;
+    const aprobado=ok>=Math.ceil(total*0.7);
+    const errores=latasRespuestas.filter(r=>!r.ok).map(r=>`• ${r.nombre}: incorrecto`);
+    cont.innerHTML=`
+      <div style="background:${aprobado?'rgba(45,106,45,.15)':'rgba(204,40,40,.12)'};border:1px solid ${aprobado?'#4a9e4a':'var(--rojo)'};padding:1.5rem 1.8rem;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:.1em;color:${aprobado?'#4a9e4a':'var(--rojo)'};">${aprobado?'✅ APROBADO':'❌ NO APROBADO'}</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.8rem;letter-spacing:.2em;color:var(--gris-clr);margin-top:.5rem;">RESULTADO: ${ok}/${total} correctos</div>
+        ${errores.length?`<div style="margin-top:1rem;font-size:.85rem;color:var(--gris-clr);line-height:1.8;">${errores.join('<br>')}</div>`:''}
+        <button onclick="initLatas()" style="margin-top:1.2rem;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.3em;background:transparent;border:1px solid rgba(200,168,75,.3);color:var(--dorado);padding:.5rem 1rem;cursor:pointer;">↺ REINTENTAR</button>
+      </div>`;
+    if(res)res.textContent='';
+    return;
+  }
+
+  const r=latasData[latasIdx];
+  cont.innerHTML=`
+    <div style="background:var(--carbon);border:1px solid rgba(200,168,75,.15);border-left:3px solid var(--dorado);padding:1.5rem 1.8rem;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.4em;color:var(--dorado);margin-bottom:.4rem;">ROBO ${latasIdx+1} DE ${latasData.length}</div>
+      <div style="font-size:1.15rem;font-weight:700;color:var(--blanco);margin-bottom:1.2rem;">${r.nombre}</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.2rem;">
+        <div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:var(--dorado);margin-bottom:.4rem;">💨 HUMOS</div>
+          <input class="finput" id="lh" type="number" min="0" max="20" placeholder="0" style="text-align:center;font-size:1.2rem;padding:.6rem;">
+        </div>
+        <div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:var(--dorado);margin-bottom:.4rem;">🥫 LATAS</div>
+          <input class="finput" id="ll" type="number" min="0" max="20" placeholder="0" style="text-align:center;font-size:1.2rem;padding:.6rem;">
+        </div>
+        <div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:var(--dorado);margin-bottom:.4rem;">🔥 MOLOTOVS</div>
+          <input class="finput" id="lm" type="number" min="0" max="20" placeholder="0" style="text-align:center;font-size:1.2rem;padding:.6rem;">
+        </div>
+      </div>
+      <button onclick="siguienteLata()" class="btn-env" style="font-size:1rem;padding:.7rem 2rem;">${latasIdx===latasData.length-1?'VER RESULTADO →':'SIGUIENTE →'}</button>
+    </div>`;
+
+  if(res){
+    const barWidth=Math.round((latasIdx/latasData.length)*100);
+    res.innerHTML=`<div style="height:3px;background:rgba(200,168,75,.15);margin-bottom:.4rem;"><div style="height:3px;background:var(--dorado);width:${barWidth}%;transition:width .4s;"></div></div><span>PROGRESO: ${latasIdx}/${latasData.length}</span>`;
+  }
+}
+
+function siguienteLata(){
+  const h=parseInt(document.getElementById('lh').value)||0;
+  const l=parseInt(document.getElementById('ll').value)||0;
+  const m=parseInt(document.getElementById('lm').value)||0;
+  const r=latasData[latasIdx];
+  latasRespuestas.push({
+    nombre:r.nombre, h,l,m,
+    corrH:r.humos,corrL:r.latas,corrM:r.molotovs,
+    ok:h===r.humos&&l===r.latas&&m===r.molotovs
+  });
+  latasIdx++;
+  renderLatas();
+}
+
+function getLatasResultado(){
+  const ok=latasRespuestas.filter(r=>r.ok).length;
+  const total=latasData.length;
+  let texto=`${ok}/${total} correctos\n`;
+  latasRespuestas.forEach(r=>{
+    texto+=`${r.ok?'✅':'❌'} ${r.nombre}\n`;
+  });
+  return texto.trim();
+}
+
+async function enviarExamen(){
+  const btn=document.getElementById('btnEnviar');
+  const st=document.getElementById('statusExamen');
+  const nombre=document.getElementById('q_nombre').value.trim();
+  const rango=document.getElementById('q_rango').value;
+  const mic=document.querySelector('input[name="mic"]:checked');
+  const dias=document.querySelector('input[name="dias"]:checked');
+  if(!nombre||!rango||!mic||!dias){
+    st.textContent='⚠ Completá todos los campos obligatorios antes de enviar.';
+    st.className='fstatus err';st.style.display='block';return;
+  }
+  btn.disabled=true;btn.textContent='ENVIANDO...';
+  let body=`🦅 **NUEVO EXAMEN DE INGRESO — GRUPO HALCÓN**\n`;
+  body+=`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  body+=`👤 **Nombre IC:** ${nombre}\n`;
+  body+=`🏅 **Rango PFA:** ${rango}\n`;
+  body+=`🎙️ **Micrófono:** ${mic.value}\n`;
+  body+=`📅 **Disponibilidad:** ${dias.value}\n`;
+  body+=`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  body+=`**📋 PREGUNTA 1 — Cantidades de latas por robo**\n\`\`\`${getLatasResultado()}\`\`\`\n`;
+  const preguntas=[
+    {id:'q_fuga',    num:'2', label:'¿Qué hacés si el sospechoso intenta fugarse en vehículo?'},
+    {id:'q_disparo', num:'3', label:'¿Cuándo está permitido disparar primero?'},
+    {id:'q_nvl',     num:'4', label:'¿Qué es el NVL? Poné un ejemplo'},
+    {id:'q_sit1',    num:'5', label:'Situación 1 — Punto sin novedades, compañero te dice que te vayas'},
+    {id:'q_sit2',    num:'6', label:'Situación 2 — Superior falta el respeto a un civil'},
+    {id:'q_sit3',    num:'7', label:'Situación 3 — Auto sospechoso, sin apoyo por radio'},
+    {id:'q_motivacion', num:'8', label:'¿Por qué querés ser parte del Grupo Halcón?'},
+    {id:'q_personaje',  num:'9', label:'Descripción de tu personaje IC'},
+  ];
+  preguntas.forEach(p=>{
+    const v=document.getElementById(p.id)?.value?.trim()||'*(sin respuesta)*';
+    body+=`**📌 PREGUNTA ${p.num} — ${p.label}**\n> ${v.replace(/\n/g,'\n> ')}\n\n`;
+  });
+  body+=`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  body+=`🕐 ${new Date().toLocaleString('es-AR')} | KilomboRP — Grupo Halcón`;
+  const chunks=[];let cur='';
+  body.split('\n').forEach(line=>{if((cur+line+'\n').length>1900){chunks.push(cur);cur='';}cur+=line+'\n';});
+  if(cur)chunks.push(cur);
+  try{
+    for(const chunk of chunks){await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:chunk,username:'🦅 Halcón — Exámenes'})});}
+    st.textContent='✅ Examen enviado al Discord del Grupo Halcón. Un evaluador se contactará a la brevedad.';
+    st.className='fstatus ok';st.style.display='block';
+    btn.textContent='✅ ENVIADO';
+  }catch(e){
+    st.textContent='❌ Error al enviar. Revisá tu conexión e intentá de nuevo.';
+    st.className='fstatus err';st.style.display='block';
+    btn.disabled=false;btn.textContent='ENVIAR AL DISCORD 🦅';
+  }
+}
+
+// POSICIONAMIENTO
+const robos={
+  'Banco Central':{
+    nombre:'BANCO CENTRAL',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);
+      grilla(ctx,W,H);
+      calle(ctx,0,H*.52,W,H*.24,'CALLE PRINCIPAL');
+      calle(ctx,W*.76,0,W*.16,H,'CALLE LATERAL');
+      // Vereda frontal
+      vereda(ctx,W*.12,H*.44,W*.62,H*.09);
+      // Edificio
+      edificio(ctx,W*.12,H*.06,W*.62,H*.4,'BANCO CENTRAL');
+      // Columnas fachada
+      columna(ctx,W*.22,H*.46);columna(ctx,W*.32,H*.46);
+      columna(ctx,W*.45,H*.46);columna(ctx,W*.55,H*.46);columna(ctx,W*.64,H*.46);columna(ctx,W*.72,H*.46);
+      // P1 — esquina IZQUIERDA del edificio (entrada principal en la esquina)
+      escalera(ctx,W*.09,H*.38,W*.06,H*.08);
+      puerta(ctx,W*.09,H*.34,W*.06,H*.08,'P1');
+      // P2 — fachada frontal, lado DERECHO (puerta secundaria más chica)
+      escalera(ctx,W*.57,H*.43,W*.1,H*.05);
+      puerta(ctx,W*.59,H*.4,W*.07,H*.05,'P2');
+      // Esquina intersección derecha
+      esquina(ctx,W*.76,H*.52);
+      norte(ctx,W-40,30);
+    }
+  },
+  'Fleeca Ayunt.':{
+    nombre:'FLEECA AYUNTAMIENTO',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);grilla(ctx,W,H);
+      calle(ctx,0,H*.55,W,H*.2,'CALLE');
+      vereda(ctx,W*.08,H*.48,W*.82,H*.08);
+      edificio(ctx,W*.1,H*.08,W*.78,H*.42,'FLEECA BANK — AYUNTAMIENTO');
+      puerta(ctx,W*.44,H*.44,W*.1,H*.04,'P');
+      columna(ctx,W*.12,H*.44);columna(ctx,W*.22,H*.44);columna(ctx,W*.72,H*.44);columna(ctx,W*.82,H*.44);
+      // Hidrante
+      hidrante(ctx,W*.08,H*.5);
+      norte(ctx,W-40,30);
+    }
+  },
+  'Banco Paleto':{
+    nombre:'BLAINE COUNTY SAVINGS BANK',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);grilla(ctx,W,H);
+      // Estacionamiento frente
+      estacionamiento(ctx,W*.1,H*.5,W*.78,H*.25);
+      calle(ctx,0,H*.76,W,H*.18,'CALLE PALETO BAY');
+      edificio(ctx,W*.18,H*.06,W*.62,H*.46,'BLAINE COUNTY BANK');
+      puerta(ctx,W*.44,H*.48,W*.1,H*.04,'P');
+      // Bancos/jardín a los lados
+      arbusto(ctx,W*.12,H*.44);arbusto(ctx,W*.74,H*.44);
+      norte(ctx,W-40,30);
+    }
+  },
+  'Fleeca Taller':{
+    nombre:'FLEECA BANK — TALLER',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);grilla(ctx,W,H);
+      // Galería comercial izquierda
+      local(ctx,W*.02,H*.08,W*.1,H*.42,'LOCAL');
+      calle(ctx,0,H*.54,W,H*.18,'GALERÍA / CALLE INTERNA');
+      vereda(ctx,W*.12,H*.48,W*.78,H*.07);
+      edificio(ctx,W*.12,H*.08,W*.78,H*.42,'FLEECA BANK — TALLER');
+      puerta(ctx,W*.44,H*.44,W*.1,H*.04,'P');
+      columna(ctx,W*.14,H*.44);columna(ctx,W*.84,H*.44);
+      norte(ctx,W-40,30);
+    }
+  },
+  'Fleeca Life':{
+    nombre:'FLEECA BANK — LIFE',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);grilla(ctx,W,H);
+      calle(ctx,0,H*.55,W,H*.2,'AVENIDA');
+      // Cordón rojo
+      cordon(ctx,0,H*.53,W,H*.025);
+      vereda(ctx,W*.08,H*.47,W*.82,H*.08);
+      edificio(ctx,W*.08,H*.08,W*.82,H*.42,'FLEECA BANK — LIFE');
+      puerta(ctx,W*.43,H*.44,W*.12,H*.04,'P');
+      arbusto(ctx,W*.1,H*.46);arbusto(ctx,W*.78,H*.46);
+      norte(ctx,W-40,30);
+    }
+  },
+  'Mazebank':{
+    nombre:'MAZEBANK OF LOS SANTOS',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);grilla(ctx,W,H);
+      calle(ctx,0,H*.52,W,H*.2,'CALLE PRINCIPAL');
+      calle(ctx,W*.68,0,W*.18,H,'CALLE LATERAL');
+      // Vereda frontal y lateral
+      vereda(ctx,W*.04,H*.45,W*.62,H*.08);
+      vereda(ctx,W*.64,H*.06,W*.06,H*.47);
+      // Edificio
+      edificio(ctx,W*.04,H*.06,W*.62,H*.42,'MAZEBANK');
+      // Puerta principal P1 — frontal
+      puerta(ctx,W*.28,H*.43,W*.12,H*.04,'P1');
+      // Puerta secundaria P2 — lateral derecha
+      puerta(ctx,W*.64,H*.2,W*.04,H*.1,'P2');
+      // Palmeras frente al banco
+      arbol(ctx,W*.08,H*.47);arbol(ctx,W*.18,H*.47);arbol(ctx,W*.48,H*.47);
+      // Bicicletero / baranda
+      bicicletero(ctx,W*.55,H*.47);
+      bicicletero(ctx,W*.38,H*.47);
+      esquina(ctx,W*.68,H*.52);
+      norte(ctx,W-40,30);
+    }
+  },
+  'Joyería':{
+    nombre:'VANGELICO — JOYERÍA',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);grilla(ctx,W,H);
+      // Adoquines (textura)
+      adoquines(ctx,0,H*.5,W,H*.5);
+      calle(ctx,0,H*.5,W,H*.22,'PORTOLA DRIVE');
+      vereda(ctx,W*.02,H*.43,W*.94,H*.08);
+      edificio(ctx,W*.02,H*.04,W*.94,H*.42,'VANGELICO — FINE JEWELLERY');
+      // Vitrinas
+      vitrina(ctx,W*.05,H*.1,W*.15,H*.28);
+      vitrina(ctx,W*.23,H*.1,W*.15,H*.28);
+      vitrina(ctx,W*.58,H*.1,W*.15,H*.28);
+      vitrina(ctx,W*.76,H*.1,W*.15,H*.28);
+      puerta(ctx,W*.42,H*.36,W*.14,H*.06,'P');
+      // Macetas
+      arbusto(ctx,W*.38,H*.43);arbusto(ctx,W*.58,H*.43);
+      norte(ctx,W-40,30);
+    }
+  },
+  'Genérico':{
+    nombre:'OBJETIVO GENÉRICO',
+    dibujar:(ctx,W,H)=>{
+      ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,W,H);grilla(ctx,W,H);
+      calle(ctx,0,H*.55,W,H*.2,'CALLE');
+      vereda(ctx,W*.1,H*.48,W*.78,H*.08);
+      edificio(ctx,W*.1,H*.08,W*.78,H*.42,'OBJETIVO');
+      puerta(ctx,W*.44,H*.44,W*.1,H*.04,'P');
+      norte(ctx,W-40,30);
+    }
+  },
+};
+
+// ── FUNCIONES DE DIBUJO PLANO ──
+function grilla(ctx,W,H){
+  ctx.save();ctx.strokeStyle='rgba(100,80,40,.12)';ctx.lineWidth=.5;
+  for(let x=0;x<W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<H;y+=20){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  ctx.restore();
+}
+function calle(ctx,x,y,w,h,label){
+  ctx.save();
+  ctx.fillStyle='#d4c9b0';ctx.fillRect(x,y,w,h);
+  // Líneas de calle
+  ctx.setLineDash([12,8]);ctx.strokeStyle='rgba(100,80,40,.3)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x,y+h/2);ctx.lineTo(x+w,y+h/2);ctx.stroke();
+  ctx.setLineDash([]);
+  if(label){ctx.fillStyle='rgba(80,60,20,.5)';ctx.font=`italic ${Math.max(9,w*.025)}px serif`;ctx.textAlign='center';ctx.fillText(label,x+w/2,y+h/2+4);}
+  ctx.restore();
+}
+function vereda(ctx,x,y,w,h){
+  ctx.save();ctx.fillStyle='#e8e0cc';ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle='rgba(80,60,20,.2)';ctx.lineWidth=.5;ctx.strokeRect(x,y,w,h);
+  ctx.restore();
+}
+function edificio(ctx,x,y,w,h,label){
+  ctx.save();
+  ctx.fillStyle='rgba(0,0,0,.08)';ctx.fillRect(x+4,y+4,w,h);
+  ctx.fillStyle='#e0d8c8';ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle='#2a1f0a';ctx.lineWidth=2.5;ctx.strokeRect(x,y,w,h);
+  ctx.strokeStyle='rgba(40,30,10,.15)';ctx.lineWidth=.5;
+  ctx.beginPath();ctx.moveTo(x+10,y);ctx.lineTo(x+10,y+h);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x+w-10,y);ctx.lineTo(x+w-10,y+h);ctx.stroke();
+  ctx.fillStyle='rgba(40,30,10,.7)';ctx.font=`bold ${Math.max(10,w*.025)}px 'Barlow Condensed',sans-serif`;ctx.textAlign='center';
+  ctx.fillText(label,x+w/2,y+h/2+4);
+  ctx.restore();
+}
+function puerta(ctx,x,y,w,h,label){
+  ctx.save();
+  // Hueco en pared
+  ctx.fillStyle='#f5f0e8';ctx.fillRect(x,y,w,h);
+  // Arco de apertura
+  ctx.strokeStyle='#2a1f0a';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.arc(x+w/2,y,w/2,0,Math.PI);ctx.stroke();
+  // Líneas de puerta
+  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+h);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x+w,y);ctx.lineTo(x+w,y+h);ctx.stroke();
+  // Label
+  ctx.fillStyle='#cc2828';ctx.font=`bold ${Math.max(9,w*.3)}px 'Share Tech Mono',monospace`;ctx.textAlign='center';
+  ctx.fillText(label,x+w/2,y+h*.7);
+  ctx.restore();
+}
+function escalera(ctx,x,y,w,h){
+  ctx.save();ctx.strokeStyle='rgba(40,30,10,.4)';ctx.lineWidth=.8;
+  for(let i=0;i<=4;i++){ctx.beginPath();ctx.moveTo(x,y+i*h/4);ctx.lineTo(x+w,y+i*h/4);ctx.stroke();}
+  ctx.restore();
+}
+function columna(ctx,x,y){
+  ctx.save();ctx.fillStyle='#2a1f0a';ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();ctx.restore();
+}
+function arbusto(ctx,x,y){
+  ctx.save();ctx.fillStyle='rgba(60,100,40,.5)';ctx.strokeStyle='rgba(30,60,20,.6)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.restore();
+}
+function arbol(ctx,x,y){
+  ctx.save();ctx.fillStyle='rgba(60,100,40,.4)';ctx.strokeStyle='rgba(30,60,20,.5)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.fill();ctx.stroke();
+  ctx.fillStyle='rgba(30,60,20,.6)';ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+function hidrante(ctx,x,y){
+  ctx.save();ctx.fillStyle='#cc4422';ctx.fillRect(x-4,y-6,8,10);ctx.restore();
+}
+function bicicletero(ctx,x,y){
+  ctx.save();ctx.strokeStyle='rgba(40,30,10,.4)';ctx.lineWidth=1;
+  ctx.strokeRect(x-8,y-3,16,6);ctx.restore();
+}
+function estacionamiento(ctx,x,y,w,h){
+  ctx.save();ctx.fillStyle='#cdc3aa';ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle='rgba(80,60,20,.3)';ctx.lineWidth=.8;ctx.setLineDash([4,4]);
+  for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(x+i*w/5,y);ctx.lineTo(x+i*w/5,y+h);ctx.stroke();}
+  ctx.setLineDash([]);ctx.strokeStyle='rgba(80,60,20,.4)';ctx.lineWidth=.5;ctx.strokeRect(x,y,w,h);
+  ctx.fillStyle='rgba(80,60,20,.3)';ctx.font=`italic ${Math.max(9,w*.04)}px serif`;ctx.textAlign='center';
+  ctx.fillText('ESTACIONAMIENTO',x+w/2,y+h/2+4);ctx.restore();
+}
+function local(ctx,x,y,w,h,label){
+  ctx.save();ctx.fillStyle='#d8d0be';ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle='rgba(40,30,10,.4)';ctx.lineWidth=1;ctx.strokeRect(x,y,w,h);
+  ctx.fillStyle='rgba(40,30,10,.5)';ctx.font=`${Math.max(7,w*.18)}px serif`;ctx.textAlign='center';
+  ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(-Math.PI/2);ctx.fillText(label,0,0);ctx.restore();
+  ctx.restore();
+}
+function vitrina(ctx,x,y,w,h){
+  ctx.save();ctx.fillStyle='rgba(180,220,240,.3)';ctx.strokeStyle='rgba(40,30,10,.5)';ctx.lineWidth=1;
+  ctx.fillRect(x,y,w,h);ctx.strokeRect(x,y,w,h);ctx.restore();
+}
+function cordon(ctx,x,y,w,h){
+  ctx.save();ctx.fillStyle='rgba(180,30,30,.2)';ctx.fillRect(x,y,w,h);ctx.restore();
+}
+function adoquines(ctx,x,y,w,h){
+  ctx.save();ctx.fillStyle='#c8b89a';ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle='rgba(100,80,50,.2)';ctx.lineWidth=.5;
+  for(let row=0;row<h/12;row++){
+    const off=row%2===0?0:15;
+    for(let col=-1;col<w/30+1;col++){ctx.strokeRect(x+col*30+off,y+row*12,28,10);}
+  }ctx.restore();
+}
+function esquina(ctx,x,y){
+  ctx.save();ctx.strokeStyle='rgba(40,30,10,.3)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.arc(x,y,20,0,Math.PI/2);ctx.stroke();ctx.setLineDash([]);ctx.restore();
+}
+function norte(ctx,x,y){
+  ctx.save();
+  ctx.fillStyle='rgba(40,30,10,.7)';ctx.strokeStyle='rgba(40,30,10,.7)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x,y-12);ctx.lineTo(x+6,y+4);ctx.lineTo(x,y);ctx.lineTo(x-6,y+4);ctx.closePath();ctx.fill();
+  ctx.font=`bold 10px serif`;ctx.textAlign='center';ctx.fillText('N',x,y-14);
+  ctx.restore();
+}
+const tipos={
+  patrullero:{c:'#2060cc',
+    dibujar:(ctx,r)=>{
+      ctx.fillStyle='#3070dd';ctx.strokeStyle='#111';ctx.lineWidth=1.5;
+      // Carrocería principal
+      ctx.beginPath();ctx.rect(-r*.9,-r*.42,r*1.8,r*.84);ctx.fill();ctx.stroke();
+      // Capó delantero
+      ctx.fillStyle='#4488ff';ctx.beginPath();ctx.rect(-r*.9,-r*.36,r*.55,r*.72);ctx.fill();ctx.stroke();
+      // Techo
+      ctx.fillStyle='#1848aa';ctx.beginPath();ctx.rect(-r*.28,-r*.32,r*.75,r*.64);ctx.fill();ctx.stroke();
+      // Parabrisas
+      ctx.fillStyle='rgba(160,210,255,.55)';ctx.beginPath();ctx.rect(-r*.26,-r*.26,r*.32,r*.52);ctx.fill();
+      // Ruedas
+      rued(ctx,-r*.62,-r*.42,r*.19);rued(ctx,r*.58,-r*.42,r*.19);
+      rued(ctx,-r*.62,r*.42,r*.19);rued(ctx,r*.58,r*.42,r*.19);
+      // Sirena
+      ctx.fillStyle='#ff2020';ctx.fillRect(-r*.14,-r*.36,r*.13,r*.08);
+      ctx.fillStyle='#2020ff';ctx.fillRect(r*.03,-r*.36,r*.13,r*.08);
+    }
+  },
+  furgon:{c:'#aa7700',
+    dibujar:(ctx,r)=>{
+      // Cuerpo furgón
+      ctx.fillStyle='#cc9900';ctx.strokeStyle='#111';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.rect(-r*1.1,-r*.52,r*2.2,r*1.04);ctx.fill();ctx.stroke();
+      // Cabina
+      ctx.fillStyle='#ddaa10';ctx.beginPath();ctx.rect(-r*1.1,-r*.48,r*.65,r*.96);ctx.fill();ctx.stroke();
+      // Parabrisas
+      ctx.fillStyle='rgba(160,210,255,.4)';ctx.beginPath();ctx.rect(-r*1.04,-r*.38,r*.48,r*.76);ctx.fill();
+      // División cabina/carga
+      ctx.strokeStyle='#886600';ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(-r*.38,-r*.52);ctx.lineTo(-r*.38,r*.52);ctx.stroke();
+      // Ruedas dobles traseras
+      rued(ctx,-r*.72,-r*.52,r*.2);rued(ctx,-r*.72,r*.52,r*.2);
+      rued(ctx,r*.58,-r*.52,r*.2);rued(ctx,r*.76,-r*.52,r*.2);
+      rued(ctx,r*.58,r*.52,r*.2);rued(ctx,r*.76,r*.52,r*.2);
+    }
+  },
+  moto:{c:'#208040',
+    dibujar:(ctx,r)=>{
+      // Chasis
+      ctx.fillStyle='#30b060';ctx.strokeStyle='#111';ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.ellipse(0,0,r*.85,r*.28,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+      // Rueda delantera
+      ctx.strokeStyle='#111';ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.arc(-r*.68,0,r*.28,0,Math.PI*2);ctx.stroke();
+      ctx.lineWidth=1;ctx.beginPath();ctx.arc(-r*.68,0,r*.12,0,Math.PI*2);ctx.stroke();
+      // Rueda trasera
+      ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(r*.68,0,r*.28,0,Math.PI*2);ctx.stroke();
+      ctx.lineWidth=1;ctx.beginPath();ctx.arc(r*.68,0,r*.12,0,Math.PI*2);ctx.stroke();
+      // Manubrio
+      ctx.strokeStyle='#30b060';ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(-r*.6,-r*.28);ctx.lineTo(-r*.6,r*.28);ctx.stroke();
+    }
+  },
+  sniper:{c:'#882020',
+    dibujar:(ctx,r)=>{
+      // Cuerpo acostado
+      ctx.fillStyle='#662020';ctx.strokeStyle='#111';ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.rect(-r*.75,-r*.18,r*1.5,r*.36);ctx.fill();ctx.stroke();
+      // Cabeza
+      ctx.fillStyle='#993030';ctx.beginPath();ctx.arc(-r*.72,0,r*.22,0,Math.PI*2);ctx.fill();ctx.stroke();
+      // Rifle
+      ctx.strokeStyle='#333';ctx.lineWidth=3;
+      ctx.beginPath();ctx.moveTo(-r*.4,0);ctx.lineTo(r*1.15,0);ctx.stroke();
+      // Mira telescópica
+      ctx.strokeStyle='#777';ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.arc(r*.45,0,r*.13,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(r*.32,0);ctx.lineTo(r*.58,0);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(r*.45,-r*.13);ctx.lineTo(r*.45,r*.13);ctx.stroke();
+    }
+  },
+};
+
+function rued(ctx,x,y,r){
+  ctx.save();ctx.translate(x,y);
+  ctx.fillStyle='#1a1a1a';ctx.strokeStyle='#555';ctx.lineWidth=1;
+  ctx.beginPath();ctx.ellipse(0,0,r,r*.62,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+  ctx.strokeStyle='#888';ctx.lineWidth=.5;ctx.beginPath();ctx.arc(0,0,r*.4,0,Math.PI*2);ctx.stroke();
+  ctx.restore();
+}
+
+let mapaActual='Banco Central', tipoActual='patrullero';
+let vehiculos=[];
+let vehiculoSeleccionado=null;
+let canvas, ctx;
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initLatas();
+  canvas=document.getElementById('mapaCanvas');
+  ctx=canvas.getContext('2d');
+
+  canvas.addEventListener('click',e=>{
+    const rect=canvas.getBoundingClientRect();
+    const cx=(e.clientX-rect.left)/canvas.width;
+    const cy=(e.clientY-rect.top)/canvas.height;
+    const idx=vehiculos.findIndex(v=>{
+      const dx=(v.x-cx)*canvas.width;
+      const dy=(v.y-cy)*canvas.height;
+      return Math.sqrt(dx*dx+dy*dy)<Math.max(18,canvas.width*.03);
+    });
+    if(idx>=0){vehiculoSeleccionado=idx;dibujar();return;}
+    vehiculos.push({x:cx,y:cy,tipo:tipoActual,rot:0});
+    vehiculoSeleccionado=vehiculos.length-1;
+    dibujar();
+  });
+
+  canvas.addEventListener('contextmenu',e=>{
+    e.preventDefault();
+    if(vehiculoSeleccionado!==null&&vehiculos[vehiculoSeleccionado]){
+      vehiculos[vehiculoSeleccionado].rot=(vehiculos[vehiculoSeleccionado].rot+45)%360;
+      dibujar();
+    }
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(vehiculoSeleccionado===null||!vehiculos[vehiculoSeleccionado])return;
+    if(e.key==='ArrowLeft'){vehiculos[vehiculoSeleccionado].rot=(vehiculos[vehiculoSeleccionado].rot-15+360)%360;dibujar();}
+    if(e.key==='ArrowRight'){vehiculos[vehiculoSeleccionado].rot=(vehiculos[vehiculoSeleccionado].rot+15)%360;dibujar();}
+    if(e.key==='Delete'){vehiculos.splice(vehiculoSeleccionado,1);vehiculoSeleccionado=null;dibujar();}
+  });
+
+  window.addEventListener('resize',resize);
+  initBtns();
+  setTimeout(resize,100);
+});
+
+function initBtns(){
+  const cont=document.getElementById('mapaBtns');cont.innerHTML='';
+  Object.keys(robos).forEach(n=>{
+    const b=document.createElement('button');
+    b.className='mapa-btn'+(n===mapaActual?' activo':'');b.textContent=n;
+    b.onclick=()=>{mapaActual=n;vehiculos=[];document.querySelectorAll('.mapa-btn').forEach(x=>x.classList.remove('activo'));b.classList.add('activo');dibujar();};
+    cont.appendChild(b);
+  });
+}
+
+function resize(){
+  const c=document.getElementById('mapaCont');
+  canvas.width=c.offsetWidth;canvas.height=c.offsetHeight;dibujar();
+}
+
+function dibujar(){
+  const W=canvas.width,H=canvas.height,m=robos[mapaActual];
+  ctx.clearRect(0,0,W,H);
+  m.dibujar(ctx,W,H);
+  ctx.save();
+  ctx.fillStyle='rgba(40,30,10,.08)';ctx.font=`bold ${Math.max(14,W*.025)}px 'Bebas Neue',cursive`;ctx.textAlign='center';
+  ctx.fillText(m.nombre,W/2,H-15);
+  ctx.restore();
+  // Dibujar vehículos con silueta real
+  vehiculos.forEach((v,i)=>{
+    const t=tipos[v.tipo];
+    const r=Math.max(18,W*.028);
+    const px=v.x*W, py=v.y*H;
+    ctx.save();
+    ctx.translate(px,py);
+    ctx.rotate(v.rot*Math.PI/180);
+    // Sombra
+    ctx.save();ctx.translate(3,3);ctx.globalAlpha=.2;t.dibujar(ctx,r);ctx.restore();
+    ctx.globalAlpha=1;
+    t.dibujar(ctx,r);
+    // Si está seleccionado, halo
+    if(vehiculoSeleccionado===i){
+      ctx.strokeStyle='#ffdd00';ctx.lineWidth=2;ctx.setLineDash([4,3]);
+      ctx.beginPath();ctx.arc(0,0,r*1.3,0,Math.PI*2);ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    // Número
+    ctx.fillStyle='#fff';ctx.strokeStyle='#000';ctx.lineWidth=2;
+    ctx.font=`bold ${Math.max(9,r*.5)}px 'Barlow Condensed',sans-serif`;ctx.textAlign='center';
+    ctx.strokeText(i+1,0,r*1.6);ctx.fillText(i+1,0,r*1.6);
+    ctx.restore();
+  });
+}
+
+function setTipo(t){tipoActual=t;}
+function deshacerUltimo(){vehiculos.pop();if(vehiculoSeleccionado>=vehiculos.length)vehiculoSeleccionado=null;if(ctx)dibujar();}
+function limpiarMapa(){vehiculos=[];vehiculoSeleccionado=null;if(ctx)dibujar();}
+function rotarSeleccionado(deg){if(vehiculoSeleccionado!==null&&vehiculos[vehiculoSeleccionado]){vehiculos[vehiculoSeleccionado].rot=(vehiculos[vehiculoSeleccionado].rot+deg+360)%360;if(ctx)dibujar();}}
+
+async function enviarMapa(){
+  const st=document.getElementById('statusMapa');
+  if(!vehiculos.length){st.textContent='⚠ Colocá al menos un vehículo antes de enviar.';st.className='fstatus err';st.style.display='block';return;}
+  const nota=document.getElementById('notaMapa').value.trim();
+  let msg=`🚗 **POSICIONAMIENTO TÁCTICO — GRUPO HALCÓN**\n📍 **Objetivo:** ${mapaActual}\n📅 ${new Date().toLocaleString('es-AR')}\n━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  vehiculos.forEach((v,i)=>{msg+=`**${v.tipo.toUpperCase()} ${i+1}** → pos ${Math.round(v.x*100)}% / ${Math.round(v.y*100)}% · rot ${v.rot}°\n`;});
+  if(nota)msg+=`\n📝 **Nota:** ${nota}`;
+  try{
+    await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:msg,username:'🦅 Halcón — Posicionamiento'})});
+    st.textContent='✅ Posicionamiento enviado al Discord.';st.className='fstatus ok';st.style.display='block';
+  }catch(e){st.textContent='❌ Error al enviar.';st.className='fstatus err';st.style.display='block';}
+}
 </script>
 </body>
 </html>
